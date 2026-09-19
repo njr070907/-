@@ -1,0 +1,111 @@
+from pathlib import Path
+
+from fastapi.testclient import TestClient
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from backend.app.db import Base, get_db
+from backend.app.main import app
+
+
+def test_extract_confirm_associate_and_complete_weekly_task(tmp_path: Path) -> None:
+    engine = create_engine(
+        f"sqlite:///{tmp_path / 'test.db'}", connect_args={"check_same_thread": False}
+    )
+    Base.metadata.create_all(engine)
+    sessions = sessionmaker(bind=engine)
+
+    def override_db():
+        with sessions() as db:
+            yield db
+
+    app.dependency_overrides[get_db] = override_db
+    try:
+        with TestClient(app) as client:
+            first = client.post(
+                "/api/notices",
+                json={
+                    "raw_text": (
+                        "奖学金材料提交通知\n"
+                        "适用对象：大一学生\n"
+                        "办理阶段：学院初审\n"
+                        "请于2026年9月21日18:30前通过学生事务系统提交。\n"
+                        "材料：申请表、成绩单"
+                    )
+                },
+            )
+            assert first.status_code == 201
+            first_id = first.json()["id"]
+
+            extracted = client.post(f"/api/notices/{first_id}/extract")
+            assert extracted.status_code == 200
+            assert extracted.json()["parse_status"] == "review_required"
+            fields = extracted.json()["extracted_json"]
+            assert fields["deadline"] == "2026-09-21T18:30"
+            assert fields["evidence"]
+
+            confirmed = client.post(
+                f"/api/notices/{first_id}/confirm",
+                json={
+                    "extraction": fields,
+                    "new_matter_name": "2026 年奖学金材料",
+                    "task": {
+                        "stage": "学院初审",
+                        "deadline": fields["deadline"],
+                        "submit_channel": fields["submit_channel"],
+                        "materials": fields["materials"],
+                    },
+                },
+            )
+            assert confirmed.status_code == 200
+            assert confirmed.json()["parse_status"] == "confirmed"
+            matter_id = confirmed.json()["matter_id"]
+            assert matter_id
+
+            second = client.post(
+                "/api/notices",
+                json={"raw_text": "奖学金材料补充通知\n请按学院要求补交。"},
+            )
+            assert second.status_code == 201
+            associated = client.post(
+                f"/api/matters/{matter_id}/notices/{second.json()['id']}"
+            )
+            assert associated.status_code == 200
+            assert associated.json()["matter_id"] == matter_id
+
+            no_deadline_task = client.post(
+                f"/api/notices/{second.json()['id']}/confirm",
+                json={
+                    "extraction": fields,
+                    "matter_id": matter_id,
+                    "task": {
+                        "stage": "班级收集",
+                        "deadline": None,
+                        "submit_channel": "",
+                        "materials": [],
+                    },
+                },
+            )
+            assert no_deadline_task.status_code == 200
+
+            detail = client.get(f"/api/matters/{matter_id}")
+            assert detail.status_code == 200
+            assert len(detail.json()["notices"]) == 2
+            assert len(detail.json()["tasks"]) == 2
+
+            weekly = client.get("/api/tasks/week?start=2026-09-20")
+            assert weekly.status_code == 200
+            assert len(weekly.json()) == 1
+            task_id = weekly.json()[0]["id"]
+            completed = client.patch(f"/api/tasks/{task_id}", json={"completed": True})
+            assert completed.status_code == 200
+            assert completed.json()["completed"] is True
+
+            invalid = client.post(
+                f"/api/notices/{second.json()['id']}/confirm",
+                json={"extraction": fields},
+            )
+            assert invalid.status_code == 422
+    finally:
+        app.dependency_overrides.clear()
+        engine.dispose()

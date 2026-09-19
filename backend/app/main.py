@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from datetime import date, timedelta
 from uuid import uuid4
 
 from fastapi import Depends, FastAPI, HTTPException, Query
@@ -8,8 +9,19 @@ from sqlalchemy.orm import Session
 
 from backend.app.config import CORS_ORIGINS
 from backend.app.db import get_db, init_db
-from backend.app.models import Notice
-from backend.app.schemas import NoticeCreate, NoticeDetail, NoticeSummary
+from backend.app.models import Matter, Notice, Task
+from backend.app.schemas import (
+    MatterCreate,
+    MatterDetail,
+    MatterSummary,
+    NoticeConfirm,
+    NoticeCreate,
+    NoticeDetail,
+    NoticeSummary,
+    TaskRead,
+    TaskUpdate,
+)
+from backend.app.services.notice_processing import extract_notice_fields
 
 
 @asynccontextmanager
@@ -66,3 +78,154 @@ def create_notice(payload: NoticeCreate, db: Session = Depends(get_db)) -> Notic
     db.commit()
     db.refresh(notice)
     return notice
+
+
+def _notice_or_404(notice_id: str, db: Session) -> Notice:
+    notice = db.get(Notice, notice_id)
+    if notice is None:
+        raise HTTPException(status_code=404, detail="Notice not found")
+    return notice
+
+
+def _matter_or_404(matter_id: str, db: Session) -> Matter:
+    matter = db.get(Matter, matter_id)
+    if matter is None:
+        raise HTTPException(status_code=404, detail="Matter not found")
+    return matter
+
+
+@app.post("/api/notices/{notice_id}/extract", response_model=NoticeDetail)
+def extract_notice(notice_id: str, db: Session = Depends(get_db)) -> Notice:
+    notice = _notice_or_404(notice_id, db)
+    extraction = extract_notice_fields(notice.raw_text)
+    notice.extracted_json = extraction.model_dump(mode="json")
+    notice.parse_status = "review_required"
+    db.commit()
+    db.refresh(notice)
+    return notice
+
+
+@app.post("/api/matters", response_model=MatterSummary, status_code=201)
+def create_matter(payload: MatterCreate, db: Session = Depends(get_db)) -> Matter:
+    matter = Matter(id=f"matter_{uuid4().hex}", name=payload.name)
+    db.add(matter)
+    db.commit()
+    db.refresh(matter)
+    return matter
+
+
+@app.get("/api/matters", response_model=list[MatterSummary])
+def list_matters(db: Session = Depends(get_db)) -> list[Matter]:
+    return list(db.scalars(select(Matter).order_by(Matter.created_at.desc(), Matter.id.desc())))
+
+
+@app.get("/api/matters/{matter_id}", response_model=MatterDetail)
+def get_matter(matter_id: str, db: Session = Depends(get_db)) -> MatterDetail:
+    matter = _matter_or_404(matter_id, db)
+    notices = list(
+        db.scalars(
+            select(Notice)
+            .where(Notice.matter_id == matter.id)
+            .order_by(Notice.created_at.desc(), Notice.id.desc())
+        )
+    )
+    tasks = list(
+        db.scalars(
+            select(Task).where(Task.matter_id == matter.id).order_by(Task.deadline, Task.id)
+        )
+    )
+    return MatterDetail(
+        id=matter.id,
+        name=matter.name,
+        created_at=matter.created_at,
+        notices=[NoticeSummary.model_validate(notice) for notice in notices],
+        tasks=[TaskRead.model_validate(task) for task in tasks],
+    )
+
+
+@app.post("/api/notices/{notice_id}/confirm", response_model=NoticeDetail)
+def confirm_notice(
+    notice_id: str, payload: NoticeConfirm, db: Session = Depends(get_db)
+) -> Notice:
+    notice = _notice_or_404(notice_id, db)
+    if payload.matter_id:
+        matter = _matter_or_404(payload.matter_id, db)
+    else:
+        matter = Matter(
+            id=f"matter_{uuid4().hex}",
+            name=payload.new_matter_name or payload.extraction.matter_name,
+        )
+        db.add(matter)
+
+    notice.matter_id = matter.id
+    notice.extracted_json = payload.extraction.model_dump(mode="json")
+    notice.parse_status = "confirmed"
+
+    if payload.task is not None:
+        task = db.scalar(select(Task).where(Task.source_notice_id == notice.id))
+        if task is None:
+            task = Task(
+                id=f"task_{uuid4().hex}",
+                matter_id=matter.id,
+                source_notice_id=notice.id,
+                stage=payload.task.stage,
+                deadline=payload.task.deadline,
+                submit_channel=payload.task.submit_channel,
+                materials=payload.task.materials,
+                confirmed=True,
+            )
+            db.add(task)
+        else:
+            task.matter_id = matter.id
+            task.stage = payload.task.stage
+            task.deadline = payload.task.deadline
+            task.submit_channel = payload.task.submit_channel
+            task.materials = payload.task.materials
+            task.confirmed = True
+
+    db.commit()
+    db.refresh(notice)
+    return notice
+
+
+@app.post("/api/matters/{matter_id}/notices/{notice_id}", response_model=NoticeDetail)
+def associate_notice_with_matter(
+    matter_id: str, notice_id: str, db: Session = Depends(get_db)
+) -> Notice:
+    _matter_or_404(matter_id, db)
+    notice = _notice_or_404(notice_id, db)
+    notice.matter_id = matter_id
+    db.commit()
+    db.refresh(notice)
+    return notice
+
+
+@app.get("/api/tasks/week", response_model=list[TaskRead])
+def list_week_tasks(
+    start: date | None = Query(default=None), db: Session = Depends(get_db)
+) -> list[Task]:
+    week_start = start or date.today()
+    week_end = week_start + timedelta(days=7)
+    return list(
+        db.scalars(
+            select(Task)
+            .where(
+                Task.confirmed.is_(True),
+                Task.deadline.is_not(None),
+                Task.deadline >= week_start.isoformat(),
+                Task.deadline < week_end.isoformat(),
+            )
+            .order_by(Task.deadline, Task.id)
+        )
+    )
+
+
+@app.patch("/api/tasks/{task_id}", response_model=TaskRead)
+def update_task(task_id: str, payload: TaskUpdate, db: Session = Depends(get_db)) -> Task:
+    task = db.get(Task, task_id)
+    if task is None:
+        raise HTTPException(status_code=404, detail="Task not found")
+    task.completed = payload.completed
+    db.commit()
+    db.refresh(task)
+    return task

@@ -58,3 +58,46 @@ Content-Type: application/json
 ```
 
 缺少或留空 `raw_text` 返回 `422` 和 FastAPI 验证错误；非法时间同样返回 `422`。
+
+## 事项、确认与待办
+
+### POST /api/notices/{notice_id}/extract
+
+运行规则提取，把结果保存到 extracted_json，并将通知标为 review_required。原文不会被修改。
+
+### POST /api/notices/{notice_id}/confirm
+
+用户编辑提取结果后确认。请求必须在 matter_id（关联已有事项）和 new_matter_name（新建事项）中二选一；可选传入 task 创建或更新该通知对应的办理环节。
+
+    {
+      "extraction": {
+        "matter_name": "奖学金材料提交通知",
+        "audience": ["大一学生"],
+        "stage": "学院初审",
+        "deadline": "2026-09-21T18:30",
+        "submit_channel": "学生事务系统",
+        "materials": ["申请表"],
+        "explicit_change": "",
+        "confidence": 0.8,
+        "evidence": []
+      },
+      "new_matter_name": "2026 年奖学金材料",
+      "task": {
+        "stage": "学院初审",
+        "deadline": "2026-09-21T18:30",
+        "submit_channel": "学生事务系统",
+        "materials": ["申请表"]
+      }
+    }
+
+### POST /api/matters 与 GET /api/matters/{matter_id}
+
+创建事项，或查看该事项下的通知版本和办理环节。
+
+### POST /api/matters/{matter_id}/notices/{notice_id}
+
+将一条通知手动关联到已有事项，不会创建待办。
+
+### GET /api/tasks/week?start=2026-09-20
+
+查看从 start 起七天内、已确认且截止时间明确的待办。PATCH /api/tasks/{task_id} 请求 { "completed": true } 可标记完成。
