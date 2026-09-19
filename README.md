@@ -24,7 +24,7 @@ git switch main
 git pull --ff-only origin main
 Copy-Item .env.example .env
 Copy-Item frontend/.env.example frontend/.env
-python -m venv backend/.venv
+py -3 -m venv backend/.venv
 .\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.txt
 .\backend\.venv\Scripts\python.exe -m backend.scripts.import_seed_data
 .\backend\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --reload --port 8000
@@ -40,7 +40,7 @@ npm run dev
 
 浏览器打开 `http://localhost:5173`，应看到 `Connected`、数据库通知数量、演示通知标题；点击标题可查看原始正文。后端 `/health` 在 `http://localhost:8000/health`，API 文档在 `http://localhost:8000/docs`。
 
-macOS/Linux 使用 `python3 -m venv backend/.venv`、`backend/.venv/bin/python`，复制配置文件用 `cp`；其他步骤相同。若机器的 Python 镜像不可用，可在安装命令追加 `-i https://pypi.org/simple`。
+Windows 优先使用 `py -3` 调用 Python；macOS/Linux 使用 `python3 -m venv backend/.venv`、`backend/.venv/bin/python`，复制配置文件用 `cp`；其他步骤相同。若机器的 Python 镜像不可用，可在安装命令追加 `-i https://pypi.org/simple`。
 
 ## 数据与测试
 
