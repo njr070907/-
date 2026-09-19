@@ -57,3 +57,11 @@ npm run build
 ```
 
 具体请求与错误格式见 [docs/API.md](docs/API.md)。架构边界及未来迁移说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。目前建表使用 `create_all`，正式演进数据库结构时需引入迁移工具。
+
+## 演示环境
+
+答辩前需要把本地数据库恢复到固定演示状态时，请严格按 [演示环境启动与安全复位手册](docs/DEMO_RUNBOOK.md) 操作。复位命令必须显式传入 `-ResetDemo`，并且只允许处理当前仓库 `backend/` 内的 SQLite 文件：
+
+```powershell
+.\scripts\Reset-Demo.ps1 -ResetDemo
+```
