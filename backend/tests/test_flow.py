@@ -91,3 +91,17 @@ def test_bad_seed_file_reports_error_and_continues(tmp_path: Path, capsys) -> No
     assert (result.scanned, result.imported, result.failed) == (2, 1, 1)
     assert "bad.json" in capsys.readouterr().out
     engine.dispose()
+
+
+def test_cors_preflight_allows_task_patch() -> None:
+    with TestClient(app) as client:
+        response = client.options(
+            "/api/tasks/task_demo",
+            headers={
+                "Origin": "http://localhost:5173",
+                "Access-Control-Request-Method": "PATCH",
+            },
+        )
+
+    assert response.status_code == 200
+    assert "PATCH" in response.headers["access-control-allow-methods"]
