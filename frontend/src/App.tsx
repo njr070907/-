@@ -11,6 +11,7 @@ import {
   getNotice,
   getNotices,
   getWeekTasks,
+  updateNotice,
   updateTask,
   type Evidence,
   type MatterDetail,
@@ -121,6 +122,7 @@ function App() {
   const [saving, setSaving] = useState(false)
   const [formError, setFormError] = useState('')
   const [reviewNotice, setReviewNotice] = useState<NoticeDetail | null>(null)
+  const [draftNoticeId, setDraftNoticeId] = useState<string | null>(null)
   const [extraction, setExtraction] = useState<NoticeExtraction>(emptyExtraction)
   const [matterMode, setMatterMode] = useState<MatterMode>('new')
   const [newMatterName, setNewMatterName] = useState('')
@@ -192,13 +194,17 @@ function App() {
     }
     setSaving(true)
     try {
-      const created = await createNotice({
+      const payload = {
         title: title.trim() || null,
         source_name: sourceName.trim() || null,
         source_url: sourceUrl.trim() || null,
         raw_text: rawText.trim(),
-      })
-      const extracted = await extractNotice(created.id)
+      }
+      const saved = draftNoticeId
+        ? await updateNotice(draftNoticeId, payload)
+        : await createNotice(payload)
+      setDraftNoticeId(saved.id)
+      const extracted = await extractNotice(saved.id)
       const fields = extracted.extracted_json ?? emptyExtraction
       setReviewNotice(extracted)
       setExtraction(fields)
@@ -255,6 +261,7 @@ function App() {
       setSourceUrl('')
       setRawText('')
       setReviewNotice(null)
+      setDraftNoticeId(null)
       await refreshMatters()
       setToast('通知已确认并归入事项')
       setView('matters')

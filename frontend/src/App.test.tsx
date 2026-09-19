@@ -12,6 +12,7 @@ const api = vi.hoisted(() => ({
   getNotice: vi.fn(),
   getNotices: vi.fn(),
   getWeekTasks: vi.fn(),
+  updateNotice: vi.fn(),
 }))
 
 vi.mock('./api', () => ({
@@ -105,5 +106,50 @@ describe('校事清主流程', () => {
     expect(await screen.findByRole('heading', { name: '核对提取结果' })).toBeInTheDocument()
     expect(screen.getByDisplayValue('2026-09-21T18:30')).toBeInTheDocument()
     expect(screen.getByText('2026年9月21日18:30')).toBeInTheDocument()
+  })
+
+  it('返回修改原文后更新原草稿而不是新增重复通知', async () => {
+    const notice = {
+      id: 'notice_1',
+      title: '奖学金通知',
+      source_name: '学院',
+      source_url: null,
+      published_at: null,
+      source_type: 'manual_copy',
+      parse_status: 'review_required' as const,
+      matter_id: null,
+      raw_text: '原始正文',
+      collected_by: null,
+      collected_at: null,
+      imported_at: '2026-09-19T00:00:00Z',
+      created_at: '2026-09-19T00:00:00Z',
+      extracted_json: {
+        matter_name: '奖学金通知',
+        audience: [],
+        stage: '',
+        deadline: null,
+        submit_channel: '',
+        materials: [],
+        explicit_change: '',
+        confidence: 0.2,
+        evidence: [],
+      },
+    }
+    api.createNotice.mockResolvedValue(notice)
+    api.updateNotice.mockResolvedValue({ ...notice, raw_text: '修改后的正文' })
+    api.extractNotice.mockResolvedValue(notice)
+
+    render(<App />)
+    fireEvent.change(screen.getByLabelText(/原文正文/), { target: { value: '原始正文' } })
+    fireEvent.click(screen.getByRole('button', { name: /保存并提取/ }))
+    expect(await screen.findByRole('heading', { name: '核对提取结果' })).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: '返回修改原文' }))
+    fireEvent.change(screen.getByLabelText(/原文正文/), { target: { value: '修改后的正文' } })
+    fireEvent.click(screen.getByRole('button', { name: /保存并提取/ }))
+
+    await waitFor(() => expect(api.updateNotice).toHaveBeenCalledWith('notice_1', expect.objectContaining({ raw_text: '修改后的正文' })))
+    expect(api.createNotice).toHaveBeenCalledTimes(1)
+    expect(api.extractNotice).toHaveBeenCalledTimes(2)
   })
 })

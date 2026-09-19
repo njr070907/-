@@ -73,6 +73,19 @@ def test_seed_to_api_flow(tmp_path: Path) -> None:
             assert client.get(f"/api/notices/{created.json()['id']}").json()["raw_text"] == "新通知正文"
             assert client.post("/api/notices", json={"raw_text": "   "}).status_code == 422
 
+            extracted = client.post(f"/api/notices/{created.json()['id']}/extract")
+            assert extracted.status_code == 200
+            updated = client.patch(
+                f"/api/notices/{created.json()['id']}",
+                json={"title": "修改后的标题", "raw_text": "修改后的通知正文"},
+            )
+            assert updated.status_code == 200
+            assert updated.json()["id"] == created.json()["id"]
+            assert updated.json()["title"] == "修改后的标题"
+            assert updated.json()["raw_text"] == "修改后的通知正文"
+            assert updated.json()["parse_status"] == "raw"
+            assert updated.json()["extracted_json"] is None
+
         with sessions() as db:
             assert db.scalar(select(func.count()).select_from(Notice)) == len(seeds) + 1
     finally:

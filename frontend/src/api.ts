@@ -128,6 +128,12 @@ export const createNotice = (payload: NoticeCreateInput) =>
     body: JSON.stringify(payload),
   })
 
+export const updateNotice = (id: string, payload: NoticeCreateInput) =>
+  requestJson<NoticeDetail>(`/api/notices/${encodeURIComponent(id)}`, {
+    method: 'PATCH',
+    body: JSON.stringify(payload),
+  })
+
 export const extractNotice = (id: string) =>
   requestJson<NoticeDetail>(`/api/notices/${encodeURIComponent(id)}/extract`, {
     method: 'POST',

@@ -32,6 +32,20 @@ class NoticeCreate(NoticeFields):
     pass
 
 
+class NoticeUpdate(BaseModel):
+    title: str | None = None
+    raw_text: str = Field(min_length=1)
+    source_name: str | None = None
+    source_url: str | None = None
+
+    @field_validator("raw_text")
+    @classmethod
+    def require_nonblank_raw_text(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("raw_text cannot be blank")
+        return value
+
+
 class NoticeSummary(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
