@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from backend.app.services.notice_processing import NoticeExtraction
+from backend.app.services.notice_processing import NoticeExtraction, VersionComparison
 
 
 class NoticeFields(BaseModel):
@@ -133,3 +133,8 @@ class TaskUpdate(BaseModel):
 class MatterDetail(MatterSummary):
     notices: list[NoticeSummary]
     tasks: list[TaskRead]
+
+
+class VersionComparisonRead(VersionComparison):
+    previous_notice_id: str
+    current_notice_id: str

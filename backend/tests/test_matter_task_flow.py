@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 from backend.app.db import Base, get_db
 from backend.app.main import app
+from backend.app.models import Notice
 
 
 def test_extract_confirm_associate_and_complete_weekly_task(tmp_path: Path) -> None:
@@ -76,7 +77,12 @@ def test_extract_confirm_associate_and_complete_weekly_task(tmp_path: Path) -> N
             no_deadline_task = client.post(
                 f"/api/notices/{second.json()['id']}/confirm",
                 json={
-                    "extraction": fields,
+                    "extraction": {
+                        **fields,
+                        "audience": ["大一学生", "大二学生"],
+                        "deadline": "2026-09-22T18:30",
+                        "materials": ["申请表", "成绩单", "身份证明"],
+                    },
                     "matter_id": matter_id,
                     "task": {
                         "stage": "班级收集",
@@ -93,6 +99,30 @@ def test_extract_confirm_associate_and_complete_weekly_task(tmp_path: Path) -> N
             assert len(detail.json()["notices"]) == 2
             assert len(detail.json()["tasks"]) == 2
 
+            comparison = client.get(
+                f"/api/matters/{matter_id}/compare",
+                params={
+                    "previous_notice_id": first_id,
+                    "current_notice_id": second.json()["id"],
+                },
+            )
+            assert comparison.status_code == 200
+            assert comparison.json()["previous_notice_id"] == first_id
+            assert comparison.json()["current_notice_id"] == second.json()["id"]
+            assert [change["field"] for change in comparison.json()["changes"]] == [
+                "deadline",
+                "audience",
+                "materials",
+            ]
+            same_notice = client.get(
+                f"/api/matters/{matter_id}/compare",
+                params={
+                    "previous_notice_id": first_id,
+                    "current_notice_id": first_id,
+                },
+            )
+            assert same_notice.status_code == 422
+
             weekly = client.get("/api/tasks/week?start=2026-09-20")
             assert weekly.status_code == 200
             assert len(weekly.json()) == 1
@@ -106,6 +136,63 @@ def test_extract_confirm_associate_and_complete_weekly_task(tmp_path: Path) -> N
                 json={"extraction": fields},
             )
             assert invalid.status_code == 422
+
+            unconfirmed = client.post(
+                "/api/notices", json={"raw_text": "尚未确认的补充通知"}
+            )
+            assert unconfirmed.status_code == 201
+            client.post(
+                f"/api/matters/{matter_id}/notices/{unconfirmed.json()['id']}"
+            )
+            blocked = client.get(
+                f"/api/matters/{matter_id}/compare",
+                params={
+                    "previous_notice_id": first_id,
+                    "current_notice_id": unconfirmed.json()["id"],
+                },
+            )
+            assert blocked.status_code == 422
+
+            other = client.post(
+                "/api/notices", json={"raw_text": "另一事项通知\n办理阶段：学院审核"}
+            )
+            other_fields = client.post(f"/api/notices/{other.json()['id']}/extract").json()[
+                "extracted_json"
+            ]
+            other_confirmed = client.post(
+                f"/api/notices/{other.json()['id']}/confirm",
+                json={
+                    "extraction": other_fields,
+                    "new_matter_name": "另一事项",
+                },
+            )
+            assert other_confirmed.status_code == 200
+            cross_matter = client.get(
+                f"/api/matters/{matter_id}/compare",
+                params={
+                    "previous_notice_id": first_id,
+                    "current_notice_id": other.json()["id"],
+                },
+            )
+            assert cross_matter.status_code == 422
+
+            legacy = client.post(
+                "/api/notices", json={"raw_text": "历史确认通知"}
+            )
+            with sessions() as db:
+                legacy_notice = db.get(Notice, legacy.json()["id"])
+                assert legacy_notice is not None
+                legacy_notice.matter_id = matter_id
+                legacy_notice.parse_status = "confirmed"
+                db.commit()
+            missing_fields = client.get(
+                f"/api/matters/{matter_id}/compare",
+                params={
+                    "previous_notice_id": first_id,
+                    "current_notice_id": legacy.json()["id"],
+                },
+            )
+            assert missing_fields.status_code == 422
     finally:
         app.dependency_overrides.clear()
         engine.dispose()

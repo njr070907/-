@@ -20,8 +20,13 @@ from backend.app.schemas import (
     NoticeSummary,
     TaskRead,
     TaskUpdate,
+    VersionComparisonRead,
 )
-from backend.app.services.notice_processing import extract_notice_fields
+from backend.app.services.notice_processing import (
+    NoticeExtraction,
+    compare_notice_versions,
+    extract_notice_fields,
+)
 
 
 @asynccontextmanager
@@ -140,6 +145,47 @@ def get_matter(matter_id: str, db: Session = Depends(get_db)) -> MatterDetail:
         created_at=matter.created_at,
         notices=[NoticeSummary.model_validate(notice) for notice in notices],
         tasks=[TaskRead.model_validate(task) for task in tasks],
+    )
+
+
+@app.get(
+    "/api/matters/{matter_id}/compare", response_model=VersionComparisonRead
+)
+def compare_matter_notices(
+    matter_id: str,
+    previous_notice_id: str = Query(min_length=1, max_length=120),
+    current_notice_id: str = Query(min_length=1, max_length=120),
+    db: Session = Depends(get_db),
+) -> VersionComparisonRead:
+    _matter_or_404(matter_id, db)
+    if previous_notice_id == current_notice_id:
+        raise HTTPException(
+            status_code=422, detail="Choose two different notices for comparison"
+        )
+    previous = _notice_or_404(previous_notice_id, db)
+    current = _notice_or_404(current_notice_id, db)
+
+    if previous.matter_id != matter_id or current.matter_id != matter_id:
+        raise HTTPException(
+            status_code=422, detail="Both notices must belong to the requested Matter"
+        )
+    if previous.parse_status != "confirmed" or current.parse_status != "confirmed":
+        raise HTTPException(
+            status_code=422, detail="Both notices must be confirmed before comparison"
+        )
+    if previous.extracted_json is None or current.extracted_json is None:
+        raise HTTPException(
+            status_code=422, detail="Both notices must have confirmed extraction data"
+        )
+
+    comparison = compare_notice_versions(
+        NoticeExtraction.model_validate(previous.extracted_json),
+        NoticeExtraction.model_validate(current.extracted_json),
+    )
+    return VersionComparisonRead(
+        previous_notice_id=previous.id,
+        current_notice_id=current.id,
+        **comparison.model_dump(),
     )
 
 

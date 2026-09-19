@@ -98,6 +98,27 @@ Content-Type: application/json
 
 将一条通知手动关联到已有事项，不会创建待办。
 
+### GET /api/matters/{matter_id}/compare
+
+查询同一事项下两条已确认通知的字段变化。请求需要 previous_notice_id 和 current_notice_id；两条通知必须均属于该事项，且都有已确认的提取结果。
+
+    GET /api/matters/matter_xxx/compare?previous_notice_id=notice_a&current_notice_id=notice_b
+
+返回示例：
+
+    {
+      "previous_notice_id": "notice_a",
+      "current_notice_id": "notice_b",
+      "changes": [
+        {
+          "field": "deadline",
+          "before": "2026-09-20T18:00",
+          "after": "2026-09-21T18:00"
+        }
+      ],
+      "summary": ["截止时间：2026-09-20T18:00 → 2026-09-21T18:00"]
+    }
+
 ### GET /api/tasks/week?start=2026-09-20
 
 查看从 start 起七天内、已确认且截止时间明确的待办。PATCH /api/tasks/{task_id} 请求 { "completed": true } 可标记完成。
