@@ -60,7 +60,8 @@ try {
     )
     Assert-True ($first.ExitCode -eq 0) "First reset failed:`n$($first.Output)"
     Assert-True ($first.Output.Contains([IO.Path]::GetFullPath($insideDatabase))) 'Reset did not print the absolute database path.'
-    Assert-True ($first.Output -match 'Scanned: (\d+); imported: \1; skipped: 0; failed: 0') 'First reset did not import every scanned seed exactly once.'
+    $firstImport = [regex]::Match($first.Output, 'Scanned: (\d+); imported: \1; skipped: 0; failed: 0')
+    Assert-True $firstImport.Success 'First reset did not import every scanned seed exactly once.'
 
     $second = Invoke-ResetScript -Arguments @(
         '-ResetDemo',
@@ -68,9 +69,11 @@ try {
         '-PythonPath', $PythonPath
     )
     Assert-True ($second.ExitCode -eq 0) "Second reset failed:`n$($second.Output)"
-    Assert-True ($second.Output -match 'Scanned: (\d+); imported: \1; skipped: 0; failed: 0') 'Second reset was not deterministic.'
+    $secondImport = [regex]::Match($second.Output, 'Scanned: (\d+); imported: \1; skipped: 0; failed: 0')
+    Assert-True $secondImport.Success 'Second reset was not deterministic.'
+    Assert-True ($firstImport.Groups[1].Value -eq $secondImport.Groups[1].Value) 'Reset runs imported different seed counts.'
 
-    Write-Output 'PASS: explicit flag, path boundary, and repeatable reset checks succeeded.'
+    Write-Output "PASS: safety boundary checks succeeded; both reset runs imported $($firstImport.Groups[1].Value) of $($firstImport.Groups[1].Value) JSON files."
 }
 finally {
     if (Test-Path -LiteralPath $insideDatabase -PathType Leaf) {
