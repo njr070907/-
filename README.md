@@ -2,7 +2,7 @@
 
 团队成员第一次参与开发，请先阅读 [团队入门指南](docs/TEAM_START_HERE.md)。
 
-当前只验证一条链：原始通知 JSON → SQLite → FastAPI → React 浏览器页面。示例通知是演示数据，不是校方真实公告。当前没有 AI 解析、事项、待办、爬虫、登录或正式 UI。
+当前 MVP 已打通“粘贴通知 → 规则提取 → 人工确认 → 归入事项 → 版本对比 → 本周待办 → 搜索原文”主流程。示例通知是脱敏演示数据，不是校方真实公告；当前不包含爬虫、学校平台登录或自动替用户作出判断。
 
 技术栈：React + Vite + TypeScript；FastAPI + SQLAlchemy；SQLite。需要 Python 3.11+、Node.js 20.19+ 或 22.12+、Git。以下命令在仓库根目录执行，Windows PowerShell 示例。
 
@@ -11,7 +11,7 @@ backend/app/       API、数据库配置和 Notice 模型
 backend/scripts/   Seed Import
 backend/tests/     最小链路测试
 frontend/src/      开发验证页面与 API 客户端
-data/raw/          一条通知一个 JSON 的演示数据
+data/raw/          一条通知一个 JSON 的脱敏演示数据
 docs/              API 和架构说明
 ```
 
@@ -38,7 +38,7 @@ npm ci
 npm run dev
 ```
 
-浏览器打开 `http://localhost:5173`，应看到 `Connected`、数据库通知数量、演示通知标题；点击标题可查看原始正文。后端 `/health` 在 `http://localhost:8000/health`，API 文档在 `http://localhost:8000/docs`。
+浏览器打开 `http://localhost:5173`，应看到“服务正常”和添加通知表单；底部或左侧导航可进入事项、本周待办和搜索，搜索结果可打开原始正文。后端 `/health` 在 `http://localhost:8000/health`，API 文档在 `http://localhost:8000/docs`。
 
 Windows 优先使用 `py -3` 调用 Python；macOS/Linux 使用 `python3 -m venv backend/.venv`、`backend/.venv/bin/python`，复制配置文件用 `cp`；其他步骤相同。若机器的 Python 镜像不可用，可在安装命令追加 `-i https://pypi.org/simple`。
 
@@ -56,7 +56,7 @@ cd frontend
 npm run build
 ```
 
-具体请求与错误格式见 [docs/API.md](docs/API.md)。架构边界及未来迁移说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。目前建表使用 `create_all`，正式演进数据库结构时需引入迁移工具。
+具体请求与错误格式见 [docs/API.md](docs/API.md)。架构边界及未来迁移说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。SQLite 启动时会对已知旧结构执行受限升级并先备份数据库；更复杂的正式演进仍应引入迁移工具。
 
 ## 演示环境
 

@@ -59,6 +59,19 @@ Content-Type: application/json
 
 缺少或留空 `raw_text` 返回 `422` 和 FastAPI 验证错误；非法时间同样返回 `422`。
 
+## PATCH /api/notices/{id}
+
+更新一条尚未确认的通知草稿，供前端“返回修改原文”后复用原通知 ID。请求字段为 `title`、`raw_text`、`source_name` 和 `source_url`，其中 `raw_text` 必须非空。更新会把 `parse_status` 重置为 `raw` 并清除旧的 `extracted_json`，随后需要重新调用提取接口。
+
+```http
+PATCH /api/notices/notice_xxx
+Content-Type: application/json
+
+{"title":"修改后的标题","raw_text":"修改后的完整正文","source_name":"演示来源","source_url":null}
+```
+
+已确认通知不可修改，返回 `409`；未知 ID 返回 `404`。
+
 ## 事项、确认与待办
 
 ### POST /api/notices/{notice_id}/extract
