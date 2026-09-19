@@ -1,0 +1,10 @@
+{
+  "id": "example_notice",
+  "title": "【演示数据】校事清 MVP 通知",
+  "source_name": "团队演示数据",
+  "source_url": null,
+  "published_at": null,
+  "collected_by": null,
+  "collected_at": null,
+  "raw_text": "【演示数据，非真实校方通知】\n这条通知只用于验证 JSON 导入、数据库查询、API 返回和前端展示的完整链路。"
+}

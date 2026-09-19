@@ -1,0 +1,5 @@
+body { font-family: system-ui, sans-serif; margin: 2rem; line-height: 1.5; }
+main { max-width: 760px; }
+button { font: inherit; cursor: pointer; }
+li { margin: .5rem 0; }
+pre { white-space: pre-wrap; font: inherit; }
