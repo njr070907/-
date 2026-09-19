@@ -31,6 +31,22 @@ Pop-Location
 
 默认数据库是仓库内的 `backend/app.db`。如 `.env` 中设置了 `DATABASE_URL`，复位脚本只接受指向本仓库 `backend/` 内文件的 `sqlite:///` 地址。
 
+### 从旧版数据库升级
+
+后端启动时会检查本地 SQLite 的 `notices` 表。旧库缺少 `matter_id` 或
+`extracted_json` 时，系统先在同一目录生成
+`app.backup-日期时间.db`，再补齐字段。日志出现“SQLite schema upgraded”表示
+升级完成；出现“schema is up to date”表示无需处理。旧通知正文不会被改写。
+
+答辩前请确认备份位于仓库 `backend/` 目录内，然后执行以下快速验证：
+
+```powershell
+Invoke-RestMethod http://localhost:8000/health
+```
+
+如果升级失败，停止后端，保留原数据库与自动生成的备份，不要反复删除或覆盖文件；
+改用下方固定演示数据复位流程准备现场环境。
+
 ## 固定演示数据复位
 
 确认终端显示的绝对路径以当前仓库的 `backend` 目录开头，再继续：
