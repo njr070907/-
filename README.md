@@ -1,5 +1,7 @@
 # 校事清 MVP 基础工程
 
+团队成员第一次参与开发，请先阅读 [团队入门指南](docs/TEAM_START_HERE.md)。
+
 当前只验证一条链：原始通知 JSON → SQLite → FastAPI → React 浏览器页面。示例通知是演示数据，不是校方真实公告。当前没有 AI 解析、事项、待办、爬虫、登录或正式 UI。
 
 技术栈：React + Vite + TypeScript；FastAPI + SQLAlchemy；SQLite。需要 Python 3.11+、Node.js 20.19+ 或 22.12+、Git。以下命令在仓库根目录执行，Windows PowerShell 示例。
@@ -18,7 +20,8 @@ docs/              API 和架构说明
 ```powershell
 git clone https://github.com/njr070907/-.git xiaoshiqing
 cd xiaoshiqing
-git switch chore/mvp-foundation
+git switch main
+git pull --ff-only origin main
 Copy-Item .env.example .env
 Copy-Item frontend/.env.example frontend/.env
 python -m venv backend/.venv
