@@ -18,6 +18,7 @@ from backend.app.schemas import (
     NoticeCreate,
     NoticeDetail,
     NoticeSummary,
+    NoticeUpdate,
     TaskRead,
     TaskUpdate,
     VersionComparisonRead,
@@ -97,6 +98,24 @@ def _matter_or_404(matter_id: str, db: Session) -> Matter:
     if matter is None:
         raise HTTPException(status_code=404, detail="Matter not found")
     return matter
+
+
+@app.patch("/api/notices/{notice_id}", response_model=NoticeDetail)
+def update_notice(
+    notice_id: str, payload: NoticeUpdate, db: Session = Depends(get_db)
+) -> Notice:
+    notice = _notice_or_404(notice_id, db)
+    if notice.parse_status == "confirmed":
+        raise HTTPException(status_code=409, detail="Confirmed notice cannot be edited")
+    notice.title = payload.title
+    notice.raw_text = payload.raw_text
+    notice.source_name = payload.source_name
+    notice.source_url = payload.source_url
+    notice.extracted_json = None
+    notice.parse_status = "raw"
+    db.commit()
+    db.refresh(notice)
+    return notice
 
 
 @app.post("/api/notices/{notice_id}/extract", response_model=NoticeDetail)
