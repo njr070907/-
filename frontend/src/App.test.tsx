@@ -48,6 +48,20 @@ describe('校事清主流程', () => {
     expect(api.createNotice).not.toHaveBeenCalled()
   })
 
+  it('网络不可用时保留原文并显示中文重试提示', async () => {
+    api.createNotice.mockRejectedValue(new Error('Failed to fetch'))
+    render(<App />)
+
+    fireEvent.change(await screen.findByLabelText(/原文正文/), {
+      target: { value: '断网后仍需保留的通知正文' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /保存并提取/ }))
+
+    expect(await screen.findByText('保存或提取失败，请稍后重试。请检查网络连接或稍后重试。')).toBeInTheDocument()
+    expect(screen.getByDisplayValue('断网后仍需保留的通知正文')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /保存并提取/ })).toBeEnabled()
+  })
+
   it('保存通知后进入可编辑的人工确认页', async () => {
     api.createNotice.mockResolvedValue({
       id: 'notice_1',

@@ -639,7 +639,11 @@ function SearchView({ query, results, searching, onQueryChange, onSubmit, onOpen
 }
 
 function messageFrom(cause: unknown, fallback: string): string {
-  return cause instanceof Error ? cause.message : fallback
+  if (!(cause instanceof Error) || !cause.message.trim()) return fallback
+  if (/failed to fetch|networkerror|load failed|network request failed/i.test(cause.message)) {
+    return `${fallback}。请检查网络连接或稍后重试。`
+  }
+  return cause.message
 }
 
 export default App
