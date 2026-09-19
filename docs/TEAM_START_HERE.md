@@ -6,6 +6,8 @@
 
 第一版 `main` 已建立，是全队共同的、当前可运行的基线。演示链路 `data/raw` JSON → SQLite → FastAPI → React 已实际运行通过。当前页面只用来验证数据链路，还不是正式产品页面。
 
+本轮五人分工、统一数据字段、分支名和最终验收，先看 [两天演示版集成契约](INTEGRATION_CONTRACT.md)。开始写功能前必须确认自己的改动范围。
+
 ## 2. 第一次把项目取到电脑上
 
 先安装 Git、Python 和 Node.js；版本与安装、启动步骤见 [README](../README.md)。打开 **Windows PowerShell**，在你准备存放项目的文件夹中运行：
