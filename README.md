@@ -2,7 +2,7 @@
 
 团队成员第一次参与开发，请先阅读 [团队入门指南](docs/TEAM_START_HERE.md)。
 
-当前链路：原始通知 JSON → SQLite → FastAPI → React 页面。前端支持本地演示账号、用户画像、规则排序、搜索、通知详情和截止浏览。示例通知均为演示数据，不是校方真实公告。当前没有 AI 解析、爬虫或正式校园身份认证。
+当前 MVP 已打通“本地演示登录与画像 → 个性化信息广场”和“粘贴通知 → 规则提取 → 人工确认 → 归入事项 → 版本对比 → 本周待办 → 搜索原文”两条主流程。示例通知均为脱敏演示数据，不是校方真实公告；当前没有真实 AI 模型、爬虫、学校平台登录或正式校园身份认证，也不会自动替用户作出判断。
 
 技术栈：React + Vite + TypeScript；FastAPI + SQLAlchemy；SQLite。需要 Python 3.11+、Node.js 20.19+ 或 22.12+、Git。以下命令在仓库根目录执行，Windows PowerShell 示例。
 
@@ -11,7 +11,7 @@ backend/app/       API、数据库配置和 Notice 模型
 backend/scripts/   Seed Import
 backend/tests/     最小链路测试
 frontend/src/      页面、API 客户端、Auth/Profile 边界和推荐规则
-data/raw/          一条通知一个 JSON 的演示数据
+data/raw/          一条通知一个 JSON 的脱敏演示数据
 docs/              API 和架构说明
 ```
 
@@ -24,7 +24,7 @@ git switch main
 git pull --ff-only origin main
 Copy-Item .env.example .env
 Copy-Item frontend/.env.example frontend/.env
-python -m venv backend/.venv
+py -3 -m venv backend/.venv
 .\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.txt
 .\backend\.venv\Scripts\python.exe -m backend.scripts.import_seed_data
 .\backend\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --reload --port 8000
@@ -38,13 +38,13 @@ npm ci
 npm run dev
 ```
 
-浏览器打开 `http://localhost:5173`。可以注册本地账号并填写画像，也可以使用演示账号：`student@demo.test`、`graduate@demo.test`、`teacher@demo.test`，密码均为 `Demo1234`。三个账号分别展示本科竞赛/奖学金、研究生科研/讲座、教师教务/科研偏好。后端 `/health` 在 `http://localhost:8000/health`，API 文档在 `http://localhost:8000/docs`。
+浏览器打开 `http://localhost:5173`。可以注册本地账号并填写画像，也可以使用演示账号：`student@demo.test`、`graduate@demo.test`、`teacher@demo.test`，密码均为 `Demo1234`。三个账号分别展示本科竞赛/奖学金、研究生科研/讲座、教师教务/科研偏好。登录后可在“信息广场”和“办事工作台”之间切换；工作台保留添加通知、事项、版本对比、本周待办与搜索原文。后端 `/health` 在 `http://localhost:8000/health`，API 文档在 `http://localhost:8000/docs`。
 
 账户与画像保存在当前浏览器的 LocalStorage 中，仅供演示。密码经过带盐 PBKDF2 摘要处理，但浏览器本地存储不能提供生产级认证或服务端授权；请勿使用真实校园统一身份认证密码。清除浏览器站点数据会清除本地账号资料。
 
 资料页按身份联动学院与专业：本科使用普通专业与标明的特色方向，研究生使用独立项目列表，教师无需填写专业和年级。学院与专业配置、学校官方来源及特殊培养单位的处理见 [学院数据说明](docs/ACADEMIC_DATA.md)。在“其他关注关键词”中可添加最多 10 个词；关键词会与固定关注方向共同参与推荐，兴趣分数合计上限 15 分。
 
-macOS/Linux 使用 `python3 -m venv backend/.venv`、`backend/.venv/bin/python`，复制配置文件用 `cp`；其他步骤相同。若机器的 Python 镜像不可用，可在安装命令追加 `-i https://pypi.org/simple`。
+Windows 优先使用 `py -3` 调用 Python；macOS/Linux 使用 `python3 -m venv backend/.venv`、`backend/.venv/bin/python`，复制配置文件用 `cp`；其他步骤相同。若机器的 Python 镜像不可用，可在安装命令追加 `-i https://pypi.org/simple`。
 
 ## 数据与测试
 
@@ -61,4 +61,12 @@ npm run build
 npm test
 ```
 
-具体请求与错误格式见 [docs/API.md](docs/API.md)。架构边界及未来迁移说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。目前建表使用 `create_all`；本轮新增的通知元数据会对既有 SQLite 表执行可重复的补列。正式演进数据库结构时需引入迁移工具。
+具体请求与错误格式见 [docs/API.md](docs/API.md)。架构边界及未来迁移说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。SQLite 启动时会对已知旧结构执行受限升级，统一补充事项、提取结果与个性化通知元数据，并在修改前备份数据库；更复杂的正式演进仍应引入迁移工具。
+
+## 演示环境
+
+答辩前需要把本地数据库恢复到固定演示状态时，请严格按 [演示环境启动与安全复位手册](docs/DEMO_RUNBOOK.md) 操作。复位命令必须显式传入 `-ResetDemo`，并且只允许处理当前仓库 `backend/` 内的 SQLite 文件：
+
+```powershell
+.\scripts\Reset-Demo.ps1 -ResetDemo
+```

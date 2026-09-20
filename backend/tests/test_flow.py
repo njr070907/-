@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, func, inspect, select, text
 from sqlalchemy.orm import Session, sessionmaker
 
 from backend.app.config import PROJECT_ROOT
-from backend.app.db import Base, get_db
+from backend.app.db import Base, get_db, upgrade_sqlite_schema
 from backend.app.main import app
 from backend.app.models import Notice
 from backend.scripts.import_seed_data import import_demo_notices, import_directory
@@ -19,11 +19,22 @@ def test_seed_to_api_flow(tmp_path: Path) -> None:
     Base.metadata.create_all(engine)
     sessions = sessionmaker(bind=engine)
     raw_dir = PROJECT_ROOT / "data" / "raw"
+    seed_files = sorted(raw_dir.glob("*.json"))
+    seeds = [json.loads(path.read_text(encoding="utf-8")) for path in seed_files]
+    expected_ids = {seed["id"] for seed in seeds}
 
     first = import_directory(raw_dir, sessions)
     second = import_directory(raw_dir, sessions)
-    assert (first.scanned, first.imported, first.failed) == (1, 1, 0)
-    assert (second.scanned, second.skipped, second.failed) == (1, 1, 0)
+    assert (first.scanned, first.imported, first.failed) == (
+        len(seeds),
+        len(seeds),
+        0,
+    )
+    assert (second.scanned, second.skipped, second.failed) == (
+        len(seeds),
+        len(seeds),
+        0,
+    )
 
     def override_db():
         with sessions() as db:
@@ -36,10 +47,9 @@ def test_seed_to_api_flow(tmp_path: Path) -> None:
 
             listing = client.get("/api/notices")
             assert listing.status_code == 200
-            assert len(listing.json()) == 1
-            assert listing.json()[0]["id"] == "example_notice"
-            assert "raw_text" not in listing.json()[0]
-            assert listing.json()[0]["audience_roles"] is None
+            assert {item["id"] for item in listing.json()} == expected_ids
+            assert all("raw_text" not in item for item in listing.json())
+            assert all(item["audience_roles"] is None for item in listing.json())
 
             detail = client.get("/api/notices/example_notice")
             assert detail.status_code == 200
@@ -47,7 +57,15 @@ def test_seed_to_api_flow(tmp_path: Path) -> None:
                 (raw_dir / "example_notice.json").read_text(encoding="utf-8")
             )["raw_text"]
             assert client.get("/api/notices/missing").status_code == 404
-            assert len(client.get("/api/notices?query=MVP").json()) == 1
+
+            expected_search_ids = {
+                seed["id"]
+                for seed in seeds
+                if "MVP" in (seed.get("title") or "") or "MVP" in seed["raw_text"]
+            }
+            search = client.get("/api/notices?query=MVP")
+            assert search.status_code == 200
+            assert {item["id"] for item in search.json()} == expected_search_ids
 
             created = client.post("/api/notices", json={"raw_text": "新通知正文"})
             assert created.status_code == 201
@@ -55,6 +73,19 @@ def test_seed_to_api_flow(tmp_path: Path) -> None:
             assert created.json()["parse_status"] == "raw"
             assert client.get(f"/api/notices/{created.json()['id']}").json()["raw_text"] == "新通知正文"
             assert client.post("/api/notices", json={"raw_text": "   "}).status_code == 422
+
+            extracted = client.post(f"/api/notices/{created.json()['id']}/extract")
+            assert extracted.status_code == 200
+            updated = client.patch(
+                f"/api/notices/{created.json()['id']}",
+                json={"title": "修改后的标题", "raw_text": "修改后的通知正文"},
+            )
+            assert updated.status_code == 200
+            assert updated.json()["id"] == created.json()["id"]
+            assert updated.json()["title"] == "修改后的标题"
+            assert updated.json()["raw_text"] == "修改后的通知正文"
+            assert updated.json()["parse_status"] == "raw"
+            assert updated.json()["extracted_json"] is None
 
             tagged = client.post("/api/notices", json={
                 "raw_text": "演示专业事项", "audience_roles": ["postgraduate"],
@@ -66,7 +97,7 @@ def test_seed_to_api_flow(tmp_path: Path) -> None:
             assert tagged.json()["required"] is True
 
         with sessions() as db:
-            assert db.scalar(select(func.count()).select_from(Notice)) == 3
+            assert db.scalar(select(func.count()).select_from(Notice)) == len(seeds) + 2
     finally:
         app.dependency_overrides.clear()
         engine.dispose()
@@ -85,9 +116,7 @@ def test_bad_seed_file_reports_error_and_continues(tmp_path: Path, capsys) -> No
     engine.dispose()
 
 
-def test_demo_seed_and_existing_sqlite_migration(tmp_path: Path, monkeypatch) -> None:
-    from backend.app import db as db_module
-
+def test_demo_seed_and_existing_sqlite_migration(tmp_path: Path) -> None:
     engine = create_engine(f"sqlite:///{tmp_path / 'old.db'}")
     with engine.begin() as connection:
         connection.execute(text("""CREATE TABLE notices (
@@ -97,10 +126,13 @@ def test_demo_seed_and_existing_sqlite_migration(tmp_path: Path, monkeypatch) ->
             source_type VARCHAR(50), parse_status VARCHAR(50), created_at DATETIME
         )"""))
         connection.execute(text("INSERT INTO notices (id, raw_text) VALUES ('legacy', 'old content')"))
-    monkeypatch.setattr(db_module, "engine", engine)
-    db_module.init_db()
+    upgrade_sqlite_schema(engine, allowed_root=tmp_path)
+    Base.metadata.create_all(engine)
     columns = {column["name"] for column in inspect(engine).get_columns("notices")}
-    assert {"audience_roles", "colleges", "majors", "grades", "tags", "deadline", "importance", "required"} <= columns
+    assert {
+        "matter_id", "extracted_json", "audience_roles", "colleges", "majors",
+        "grades", "tags", "deadline", "importance", "required",
+    } <= columns
     sessions = sessionmaker(bind=engine)
     result = import_demo_notices(PROJECT_ROOT / "data" / "demo_notices.json", sessions)
     assert (result.scanned, result.imported, result.failed) == (15, 15, 0)
@@ -108,3 +140,17 @@ def test_demo_seed_and_existing_sqlite_migration(tmp_path: Path, monkeypatch) ->
         assert db.get(Notice, "legacy").raw_text == "old content"
         assert db.get(Notice, "demo_teacher_teaching").required is True
     engine.dispose()
+
+
+def test_cors_preflight_allows_task_patch() -> None:
+    with TestClient(app) as client:
+        response = client.options(
+            "/api/tasks/task_demo",
+            headers={
+                "Origin": "http://localhost:5173",
+                "Access-Control-Request-Method": "PATCH",
+            },
+        )
+
+    assert response.status_code == 200
+    assert "PATCH" in response.headers["access-control-allow-methods"]

@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import Boolean, DateTime, JSON, String, Text
+from sqlalchemy import Boolean, DateTime, ForeignKey, JSON, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.app.db import Base
@@ -24,7 +24,10 @@ class Notice(Base):
     imported_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
     source_type: Mapped[str] = mapped_column(String(50), default="manual_copy")
     parse_status: Mapped[str] = mapped_column(String(50), default="raw")
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    matter_id: Mapped[str | None] = mapped_column(
+        ForeignKey("matters.id"), nullable=True, index=True
+    )
+    extracted_json: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     audience_roles: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
     colleges: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
     majors: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
@@ -33,3 +36,29 @@ class Notice(Base):
     deadline: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     importance: Mapped[str | None] = mapped_column(String(20), nullable=True)
     required: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+
+class Matter(Base):
+    __tablename__ = "matters"
+
+    id: Mapped[str] = mapped_column(String(120), primary_key=True)
+    name: Mapped[str] = mapped_column(String(500), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+
+class Task(Base):
+    __tablename__ = "tasks"
+
+    id: Mapped[str] = mapped_column(String(120), primary_key=True)
+    matter_id: Mapped[str] = mapped_column(ForeignKey("matters.id"), index=True)
+    source_notice_id: Mapped[str | None] = mapped_column(
+        ForeignKey("notices.id"), nullable=True, unique=True
+    )
+    stage: Mapped[str] = mapped_column(String(255), nullable=False)
+    deadline: Mapped[str | None] = mapped_column(String(40), nullable=True, index=True)
+    submit_channel: Mapped[str] = mapped_column(Text, default="")
+    materials: Mapped[list] = mapped_column(JSON, default=list)
+    confirmed: Mapped[bool] = mapped_column(Boolean, default=True)
+    completed: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)

@@ -1,9 +1,12 @@
 from collections.abc import Generator
+from datetime import datetime, timezone
+from pathlib import Path
+from shutil import copy2
 
-from sqlalchemy import create_engine, inspect, text
+from sqlalchemy import Engine, create_engine, inspect, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
-from backend.app.config import DATABASE_URL
+from backend.app.config import DATABASE_URL, PROJECT_ROOT
 
 
 class Base(DeclarativeBase):
@@ -22,18 +25,93 @@ def get_db() -> Generator[Session, None, None]:
         yield session
 
 
+def _sqlite_file(bind: Engine) -> Path | None:
+    if bind.dialect.name != "sqlite" or not bind.url.database:
+        return None
+    if bind.url.database == ":memory:":
+        return None
+    path = Path(bind.url.database)
+    if not path.is_absolute():
+        path = Path.cwd() / path
+    return path.resolve()
+
+
+def _require_safe_database_path(database_path: Path, allowed_root: Path) -> None:
+    try:
+        database_path.relative_to(allowed_root.resolve())
+    except ValueError as exc:
+        raise RuntimeError(
+            f"Refusing to upgrade SQLite database outside {allowed_root.resolve()}: "
+            f"{database_path}"
+        ) from exc
+
+
+def upgrade_sqlite_schema(
+    bind: Engine | None = None, *, allowed_root: Path | None = None
+) -> Path | None:
+    """Upgrade the small local SQLite schema and return a backup path if changed."""
+    bind = bind or engine
+    database_path = _sqlite_file(bind)
+    if database_path is None or not database_path.exists():
+        return None
+
+    inspector = inspect(bind)
+    if "notices" not in inspector.get_table_names():
+        return None
+
+    columns = {column["name"] for column in inspector.get_columns("notices")}
+    column_definitions = {
+        "matter_id": "VARCHAR(120) REFERENCES matters(id)",
+        "extracted_json": "JSON",
+        "audience_roles": "JSON",
+        "colleges": "JSON",
+        "majors": "JSON",
+        "grades": "JSON",
+        "tags": "JSON",
+        "deadline": "DATETIME",
+        "importance": "VARCHAR(20)",
+        "required": "BOOLEAN",
+    }
+    additions = [
+        (name, f"ALTER TABLE notices ADD COLUMN {name} {sql_type}")
+        for name, sql_type in column_definitions.items()
+        if name not in columns
+    ]
+    if not additions:
+        print("SQLite database schema is up to date.")
+        return None
+
+    safe_root = (allowed_root or (PROJECT_ROOT / "backend")).resolve()
+    _require_safe_database_path(database_path, safe_root)
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S-%f")
+    backup_path = database_path.with_name(
+        f"{database_path.stem}.backup-{timestamp}{database_path.suffix}"
+    )
+    copy2(database_path, backup_path)
+
+    try:
+        with bind.begin() as connection:
+            for _, statement in additions:
+                connection.execute(text(statement))
+            connection.execute(
+                text(
+                    "CREATE INDEX IF NOT EXISTS ix_notices_matter_id "
+                    "ON notices (matter_id)"
+                )
+            )
+    except Exception as exc:
+        raise RuntimeError(
+            f"SQLite schema upgrade failed; original backup kept at {backup_path}"
+        ) from exc
+
+    added_names = [name for name, _ in additions]
+    print(
+        "SQLite schema upgraded: added "
+        f"{', '.join(added_names)}; backup: {backup_path}"
+    )
+    return backup_path
+
+
 def init_db() -> None:
+    upgrade_sqlite_schema(engine)
     Base.metadata.create_all(bind=engine)
-    # Add nullable personalization fields to existing local SQLite databases.
-    # Historical rows stay intact and null means unrestricted/unknown.
-    if engine.dialect.name == "sqlite":
-        existing = {column["name"] for column in inspect(engine).get_columns("notices")}
-        additions = {
-            "audience_roles": "JSON", "colleges": "JSON", "majors": "JSON",
-            "grades": "JSON", "tags": "JSON", "deadline": "DATETIME",
-            "importance": "VARCHAR(20)", "required": "BOOLEAN",
-        }
-        with engine.begin() as connection:
-            for name, sql_type in additions.items():
-                if name not in existing:
-                    connection.execute(text(f"ALTER TABLE notices ADD COLUMN {name} {sql_type}"))
