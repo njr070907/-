@@ -1,0 +1,1321 @@
+{
+  "source": {
+    "notion_database": "微信知识库",
+    "notion_database_url": "https://app.notion.com/p/2583643109c549d482c25a9b217f74fa?pvs=204",
+    "exported_at": "2026-09-20",
+    "record_count": 69
+  },
+  "records": [
+    {
+      "id": "notion_wechat_3e19f5a310dc8148816af78a8a6ef012",
+      "title": "关于遴选第十批“广东特支计划”教学名师的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8148816af78a8a6ef012?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-09",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "学校遴选1名在职专任教师申报第十批“广东特支计划”教学名师，意向学院须9月11日11:00前到教务部查阅并领取申报书，材料9月16日12:00前提交。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，申报书需现场领取，先标注待获取。",
+      "collected_at": "2026-09-20T01:20:46.670Z",
+      "published_at": "2026-09-09T17:54:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8148816af78a8a6ef012.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8148816af78a8a6ef012.md",
+      "raw_text_sha256": "84bb17d0673f079b30ec2f2de6e13ec13cc705119e273bb7d7fd67eb95f6b6f2"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81af891aca47de7075ce",
+      "title": "关于加快推进采购立项上会流程的温馨提示",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81af891aca47de7075ce?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-09",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "预算金额100万元及以上的采购项目应尽量于9月11日前完成立项上会审批，以保障年内采购、履约和支付。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T01:19:41.459Z",
+      "published_at": "2026-09-09T18:02:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81af891aca47de7075ce.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81af891aca47de7075ce.md",
+      "raw_text_sha256": "39df3ed9d9815fa143d01b55338b43f1ebd0c25763e04bf32f83a655537119d0"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81e39efcd3a4c57a67c1",
+      "title": "关于受理全日制本科生变更学籍身份信息申请的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81e39efcd3a4c57a67c1?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-09",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "在籍本科生可在每学期开学初四周内申请更改学籍身份信息，须提交纸质及电子扫描材料，弄虚作假将承担责任。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，附件先标注待获取。",
+      "collected_at": "2026-09-20T01:19:04.125Z",
+      "published_at": "2026-09-09T18:09:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81e39efcd3a4c57a67c1.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81e39efcd3a4c57a67c1.md",
+      "raw_text_sha256": "9e30f1ec2e294aaca694b512c7d233ca8ac34d5df3fcae932cac673b4704bbd5"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81f9808fd3d761b69e11",
+      "title": "关于2027-2028年澳门科技大学硕士保荐生报名的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81f9808fd3d761b69e11?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-09",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "符合成绩与毕业条件的学生可于9月25日前通过外事系统申请澳科大硕士保荐，学院9月30日前完成初审，后续免报名费。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，附件先标注待获取。",
+      "collected_at": "2026-09-20T01:22:05.550Z",
+      "published_at": "2026-09-09T15:29:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81f9808fd3d761b69e11.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81f9808fd3d761b69e11.md",
+      "raw_text_sha256": "b811067e1d6e8f68d80ec803fd65a9bbe493623b7f02093882bc5f0bf132c97a"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc810bb010f0e316e1707b",
+      "title": "关于售卖废旧自行车的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc810bb010f0e316e1707b?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-10",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "学校剩余583辆废旧自行车面向师生售卖，学生9月12—13日、教职工9月14—15日购买，统一50元/辆。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T01:14:25.648Z",
+      "published_at": "2026-09-10T12:00:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc810bb010f0e316e1707b.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc810bb010f0e316e1707b.md",
+      "raw_text_sha256": "54d51d34dc2db871be20740332ad0b0b2ff8decf6465ee3986fd4f34d0e749ed"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8110b21bd54efdaf7204",
+      "title": "关于举办企业（超云数字技术集团有限公司）人才需求入校宣讲的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8110b21bd54efdaf7204?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-10",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "超云将于9月14日16:00在C-5教学楼202教室开展人才需求宣讲，招聘产品、解决方案、销售及职能管培岗位。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T01:13:39.295Z",
+      "published_at": "2026-09-10T19:38:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8110b21bd54efdaf7204.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8110b21bd54efdaf7204.md",
+      "raw_text_sha256": "fd4b76c9f57561fb3d2a3349a47160ca5141f3e35719cfba9f9394bb3c70d668"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc811fb769c3d08f3f3160",
+      "title": "关于举办企业（招商银行股份有限公司深圳分行）人才需求入校宣讲的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc811fb769c3d08f3f3160?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-10",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "招商银行深圳分行于9月10日14:15在C-5教学楼119教室宣讲，面向2027届毕业生及其他感兴趣学生招聘多类岗位。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，岗位表按原文内容转写，无附件。",
+      "collected_at": "2026-09-20T01:17:34.929Z",
+      "published_at": "2026-09-10T09:02:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc811fb769c3d08f3f3160.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc811fb769c3d08f3f3160.md",
+      "raw_text_sha256": "8f4ecb4eb085bb40317938f1e44f8070815e6420fd847120653e95a6f7773ce9"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8137a68ce45cec8bdea2",
+      "title": "关于组织参加第十八届全国大学生“药苑论坛”的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8137a68ce45cec8bdea2?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-10",
+      "type": "项目",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "药学院组织校内选拔，拟推荐2个“药学科学”赛道项目；作品及报名汇总表须于9月14日9:00前发送至指定邮箱。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，附件先标注待获取。",
+      "collected_at": "2026-09-20T01:15:59.808Z",
+      "published_at": "2026-09-10T09:23:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8137a68ce45cec8bdea2.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8137a68ce45cec8bdea2.md",
+      "raw_text_sha256": "dd0e0fb1580d3ed50db6ae1b9574b98c1e669464718c60f39ed984cdc0514d20"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc810484dce26ad93443fd",
+      "title": "关于举办深圳技术大学2027届毕业生就业升学动员会的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc810484dce26ad93443fd?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2027届毕业生就业升学动员会将于2026年9月15日14:30在C-5教学楼106教室举行，并通过“深技大就业”公众号同步直播。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T01:03:50.370Z",
+      "published_at": "2026-09-11T14:49:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc810484dce26ad93443fd.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc810484dce26ad93443fd.md",
+      "raw_text_sha256": "b479cf4504bbeb6060b4cb2ca8d732fb36e36a96eabf1f08501abf8b4abb979a"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc813cbdc6f5ecfdbd27d0",
+      "title": "关于对国家重点研发计划“工程科学与复杂系统”2026年度第一批项目申报指南征求意见的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc813cbdc6f5ecfdbd27d0?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "“工程科学与复杂系统”重点专项2026年度第一批项目申报指南征求意见，意见须于2026年9月18日18:[00前发送至cjn@cae.cn](mailto:00前发送至cjn@cae.cn)。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，指南征求意见稿需登录国科管系统查阅。",
+      "collected_at": "2026-09-20T00:51:51.167Z",
+      "published_at": "2026-09-11T16:57:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc813cbdc6f5ecfdbd27d0.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc813cbdc6f5ecfdbd27d0.md",
+      "raw_text_sha256": "6fe2445288e1802809d66a93fc4dc7e394333e07cf57aaaa34065500d2117a77"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc816db6bcd88fd4ffecc7",
+      "title": "转发《广东省工业和信息化厅关于商请推荐具身智能专家的函》",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc816db6bcd88fd4ffecc7?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "面向具身智能领域专家征集推荐人选，须提交推荐表、汇总表及资质证明，材料于9月21日12:00前发送至指定邮箱。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，附件先标注待获取。",
+      "collected_at": "2026-09-20T01:09:45.942Z",
+      "published_at": "2026-09-11T10:46:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc816db6bcd88fd4ffecc7.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc816db6bcd88fd4ffecc7.md",
+      "raw_text_sha256": "c0f597e3f1316aa628f63533432196950103bbf0cc3e508287eb193662fa812e"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81718629df09a2a2f42d",
+      "title": "关于开展2026年诚信案例征集活动的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81718629df09a2a2f42d?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "[面向全校征集信用应用场景创新和诚信文化建设案例，作品可用1—5分钟微视频或2000字以内文字综述形式，材料须于2026年9月25日前发送至liminglei@sztu.edu.cn](mailto:面向全校征集信用应用场景创新和诚信文化建设案例，作品可用1—5分钟微视频或2000字以内文字综述形式，材料须于2026年9月25日前发送至liminglei@sztu.edu.cn)。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，4项推荐/汇总表附件先标注待获取。",
+      "collected_at": "2026-09-20T01:02:15.203Z",
+      "published_at": "2026-09-11T14:51:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81718629df09a2a2f42d.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81718629df09a2a2f42d.md",
+      "raw_text_sha256": "ec95567c9af229a0c814e11e0da3084cd44545855f666318dea5bd0d2bb38d05"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc817189f4f059e0ab9751",
+      "title": "关于对国家重点研发计划“关键基础件及制造工艺”2026年度项目申报指南征求意见的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc817189f4f059e0ab9751?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "“关键基础件及制造工艺”重点专项2026年度项目申报指南征求意见，意见须于2026年9月16日9:[00前发送至keji@sinomach.com.cn](mailto:00前发送至keji@sinomach.com.cn)。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，指南征求意见稿需登录国科管系统查阅。",
+      "collected_at": "2026-09-20T00:52:22.981Z",
+      "published_at": "2026-09-11T16:53:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc817189f4f059e0ab9751.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc817189f4f059e0ab9751.md",
+      "raw_text_sha256": "b5e6edc24992f2dd5b94411ff1be4cdcffb050f4531d3b393d3455b4b95a97a9"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8188b679fb4492f59062",
+      "title": "关于对“十五五”国家重点研发计划“高可信区块链网络”重点专项2026年度项目申报指南征求意见的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8188b679fb4492f59062?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "“高可信区块链网络”重点专项2026年度项目申报指南征求意见，意见须于2026年9月15日18:[00前发送至office@ntichb.org.cn](mailto:00前发送至office@ntichb.org.cn)。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，指南征求意见稿需登录国科管系统查阅。",
+      "collected_at": "2026-09-20T00:53:07.306Z",
+      "published_at": "2026-09-11T16:53:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8188b679fb4492f59062.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8188b679fb4492f59062.md",
+      "raw_text_sha256": "983bc8046d27b0ead78be4fe70187ff495fdd314b5138f203776b66a77d9afde"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81a7a02cfb2971c503d1",
+      "title": "关于召开共青团深圳技术大学第二届委员会第三次全体（扩大）会议暨新学期共青团工作会议的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81a7a02cfb2971c503d1?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "会议定于9月15日9:30在B2-1220召开，参会人员原则上不得请假并须提前10分钟签到。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T01:12:11.996Z",
+      "published_at": "2026-09-11T10:28:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81a7a02cfb2971c503d1.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81a7a02cfb2971c503d1.md",
+      "raw_text_sha256": "38afa024091f9fdaf843a0e341a0b8f0cb10124f8277178f278f8fcd46ff33f6"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81b8956fc2ebc5b38d15",
+      "title": "关于开展2026年深圳技术大学暑期“三下乡”社会实践暨“百千万工程”突击队行动评优及结项工作的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81b8956fc2ebc5b38d15?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "面向参加2026年社会实践的师生开展评优和结项，学院须于9月18日11:00前统一报送数据、申报及结项材料，附件1—7先标记待获取。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，7项申报/结项附件先标注待获取。",
+      "collected_at": "2026-09-20T01:00:19.157Z",
+      "published_at": "2026-09-11T15:50:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81b8956fc2ebc5b38d15.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81b8956fc2ebc5b38d15.md",
+      "raw_text_sha256": "25e4b9deac8b5b8b55c8b6b039955e1bb2455174205b035b4a3a8edefd3e1cb1"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81c9bae4e09d119e44b2",
+      "title": "转发《广东省教育厅关于推荐高校教师加入教育考试命题专家库的通知》",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81c9bae4e09d119e44b2?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "面向校内教师遴选推荐广东省2026—2030年教育考试命题专家库成员，材料须于9月16日12:00前发送至指定邮箱。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，附件先标注待获取。",
+      "collected_at": "2026-09-20T01:06:58.826Z",
+      "published_at": "2026-09-11T14:19:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81c9bae4e09d119e44b2.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81c9bae4e09d119e44b2.md",
+      "raw_text_sha256": "0f2be139fb8c19c6cbf6d139940d629ec548c38134a77e5265b4903bc2b581e1"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81e09beec31e03c828ed",
+      "title": "关于结业学生申请结换毕的通知（2026年9月批）",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81e09beec31e03c828ed?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2024—2026届结业生可申请结换毕业，须于2026年9月21日12:00前向学院提交申请，学院材料9月30日前报教务部。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，附件先标注待获取。",
+      "collected_at": "2026-09-20T01:08:10.145Z",
+      "published_at": "2026-09-11T10:57:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81e09beec31e03c828ed.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81e09beec31e03c828ed.md",
+      "raw_text_sha256": "b00b7ee49e879e0d29a69eb0c8ad48e61e24947641e595aa11a79dffa2dfee3b"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81e4923dd613f12b106d",
+      "title": "关于组织申报教育部高等教育司高等教育领域学科大模型征集工作的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81e4923dd613f12b106d?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "学校组织申报教育部高等教育领域学科大模型，每校限报2项；学院须于2026年9月13日前将申报材料报送教务部，材料包括申报书和5分钟以内MP4演示视频。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，2项申报附件先标注待获取。",
+      "collected_at": "2026-09-20T00:58:24.181Z",
+      "published_at": "2026-09-11T16:05:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81e4923dd613f12b106d.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81e4923dd613f12b106d.md",
+      "raw_text_sha256": "7a6a8d198eac3234448f5b5652eb8422345c786b2bea820df35d079402c6c796"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81e4b562c7e3f880c952",
+      "title": "关于2026国际周课程安排的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81e4b562c7e3f880c952?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2026国际周于9月19日至24日举行，含面向新生的Module课程和面向全校师生的Lecture讲座；选课窗口为9月11日13\\:00至9月13日22\\:00。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，附件先标注待获取。",
+      "collected_at": "2026-09-20T01:11:07.211Z",
+      "published_at": "2026-09-11T10:42:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81e4b562c7e3f880c952.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81e4b562c7e3f880c952.md",
+      "raw_text_sha256": "137c1e72a9c5f5e38b2bfb1836a55b2a4bb22c68a1f274b8f79b1df0b5cb6757"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81fab28cc617f6b369c0",
+      "title": "关于申报2026年国家社科基金中华学术外译项目的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81fab28cc617f6b369c0?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-11",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2026年国家社科基金中华学术外译项目面向符合条件的国内出版机构、高校和科研机构联合申报，重点项目资助1300—1500元/千字，一般项目1000—1200元/千字，材料需按通知要求准备。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，4项申报附件先标注待获取。",
+      "collected_at": "2026-09-20T00:56:37.961Z",
+      "published_at": "2026-09-11T16:12:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81fab28cc617f6b369c0.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81fab28cc617f6b369c0.md",
+      "raw_text_sha256": "eb85bd6ddbf330c8823f4bce1ac63a4d2c3441ade36c82afbd4061cd6174cc4f"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8100a5c8cba04b41a0a4",
+      "title": "关于对国家重点研发计划“科技强体”重点专项2026年度（第一批）项目申报指南征求意见的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8100a5c8cba04b41a0a4?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "“科技强体”重点专项2026年度（第一批）项目申报指南公开征求意见，意见请于9月17日18:[00前发送至kejichu@sport.gov.cn](mailto:00前发送至kejichu@sport.gov.cn)。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，申报指南附件先标注待获取。",
+      "collected_at": "2026-09-20T00:43:35.562Z",
+      "published_at": "2026-09-14T10:46:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8100a5c8cba04b41a0a4.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8100a5c8cba04b41a0a4.md",
+      "raw_text_sha256": "a57b306a7f01af894fab3f69e4865016222177e79f184f696ff8dcb85136eddd"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8105bdeadd5a0712e179",
+      "title": "关于统招本科生线下自助服务打印终端及线上电子成绩单平台（试运行）获取相关材料的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8105bdeadd5a0712e179?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "本科生成绩及相关材料可在行政楼裙楼二楼学生服务大厅自助打印，也可通过统一门户/校园网在线申请电子成绩单；平台试运行问题可联系教务部23256250。",
+      "source_summary": "公文通｜教务部｜2026-09-14",
+      "collected_at": "2026-09-20T00:33:16.643Z",
+      "published_at": "2026-09-14T14:56:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8105bdeadd5a0712e179.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8105bdeadd5a0712e179.md",
+      "raw_text_sha256": "b686bd30567836b5e560a489c2a07192bc7aa59e150ad125a93fada2e1fbac49"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8126be7ef135ec7aa2bb",
+      "title": "关于举办深圳技术大学2026年网络安全宣传周主题活动的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8126be7ef135ec7aa2bb?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2026年9月15日10:00—15:00在C5公共教学楼南翼248室外走廊举办网络安全宣传周主题活动，含知识有奖问答和科普手册发放。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T00:47:01.852Z",
+      "published_at": "2026-09-14T10:06:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8126be7ef135ec7aa2bb.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8126be7ef135ec7aa2bb.md",
+      "raw_text_sha256": "7d5214f2be8ba2b5287bdafcd6972e528917dfbb8385529f01ea0353fea7bfa8"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8133a9acd9f9bdafe562",
+      "title": "转发深圳市社会科学联合会《关于协助推荐深圳市社会科学研究高级专业技术资格评审委员会委员的函》",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8133a9acd9f9bdafe562?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "征集深圳市社会科学研究高级专业技术资格评审委员会委员候选人，符合九类社会科学专业及相应职称、资历条件的教师可提交推荐，材料截止2026年9月18日12:00。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，推荐教师汇总表附件先标注待获取。",
+      "collected_at": "2026-09-20T00:42:22.767Z",
+      "published_at": "2026-09-14T14:08:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8133a9acd9f9bdafe562.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8133a9acd9f9bdafe562.md",
+      "raw_text_sha256": "3b9518409f4d50550743777a7b91388c6064161c8c7a83f346380313fdf16a63"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc814cbb49c0aa775ecf6b",
+      "title": "关于开展《2027公考备考指导》讲座的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc814cbb49c0aa775ecf6b?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2026年9月15日19:00—20:30在C-5教学楼101教室举办《2027公考备考指导》讲座，面向有公考需求的学生讲解考情、规划和真题技巧。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T00:50:16.368Z",
+      "published_at": "2026-09-14T09:19:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc814cbb49c0aa775ecf6b.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc814cbb49c0aa775ecf6b.md",
+      "raw_text_sha256": "d8a52bb0b76e71c1bcaab05ee58aa5bff454406d1e2d51457050ace25591e5db"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8159bd56e71b5bf98673",
+      "title": "关于2025-2026学年我校学生体质健康测试补测的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8159bd56e71b5bf98673?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2025-2026学年获得体育锻炼分的学生可于2026年9月22日14:00—17:30在体育馆和北区田径场参加体质健康测试补测，学院名单须于9月16日17:00前报送。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，奖学金评定办法附件先标注待获取。",
+      "collected_at": "2026-09-20T00:48:22.929Z",
+      "published_at": "2026-09-14T09:50:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8159bd56e71b5bf98673.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8159bd56e71b5bf98673.md",
+      "raw_text_sha256": "f9048cf6093fbffc6dbbd031f2974d2ec803d6efa88231ecfd193170f19d51be"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81809d40c6464b2c21b4",
+      "title": "关于2026年中秋节、国庆节研究生放假调课安排的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81809d40c6464b2c21b4?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "研究生中秋节9月25日至27日放假，国庆节10月1日至7日放假；9月20日和10月10日分别补上10月6日、10月7日课程。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T00:48:49.250Z",
+      "published_at": "2026-09-14T09:27:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81809d40c6464b2c21b4.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81809d40c6464b2c21b4.md",
+      "raw_text_sha256": "f12aeb37e31ee23d966a307a74303e9bad3ec027e6a43efb9c9908a585e29f35"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81908800d05729178665",
+      "title": "转发《广东省教育厅关于推荐广东省审计专业人员高级职称评审委员会评委库候选人的通知》",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81908800d05729178665?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "面向符合条件的审计及相关专业人员征集省审计专业人员高级职称评审委员会评委库候选人，推荐表和信息表须于2026年9月17日12:00前发送至指定邮箱。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，推荐表和信息表附件先标注待获取。",
+      "collected_at": "2026-09-20T00:40:46.707Z",
+      "published_at": "2026-09-14T14:19:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81908800d05729178665.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81908800d05729178665.md",
+      "raw_text_sha256": "203d2cb8e6f4a59da5aeacbeff83771c80d6d8dc16a0f86c4130671341cacca5"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81ac9843e4b1e6657cc0",
+      "title": "关于开展XbotPark机器人基地“硬科技创业分享会”的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81ac9843e4b1e6657cc0?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "XbotPark机器人基地将于2026年9月15日15:00在人工智能学院楼C1-107举办硬科技创业分享会，介绍硬科技创业路径及学生参与渠道。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T00:43:05.625Z",
+      "published_at": "2026-09-14T11:18:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81ac9843e4b1e6657cc0.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81ac9843e4b1e6657cc0.md",
+      "raw_text_sha256": "3e0791f419ae23b4685661284606b5bd96ca0bb830cbf658077d39d3869dadda"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81afb0c1f38626be76a5",
+      "title": "关于2027年广东省哲学社会科学规划年度项目拟推荐项目的公示",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81afb0c1f38626be76a5?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "经校内申报、资格审核和校外专家匿名评审，拟推荐2027年广东省哲学社会科学规划年度项目28项，公示期为2026年9月14日至9月15日。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；28项拟推荐项目表格已复制整理，无附件。",
+      "collected_at": "2026-09-20T00:45:46.577Z",
+      "published_at": "2026-09-14T10:27:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81afb0c1f38626be76a5.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81afb0c1f38626be76a5.md",
+      "raw_text_sha256": "bf55d130bc0a5382af9a5f6a01aca13cd9b078ff2439929869cdcb67f6a82dd1"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81b4b649eaf15bcbf226",
+      "title": "关于参加第七届粤港澳高校会计商业知识竞赛的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81b4b649eaf15bcbf226?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "面向我校本科生组队参加第七届粤港澳高校会计商业知识竞赛，初赛为2026年10月11日线上答题，报名表须于9月23日前发送至指定邮箱。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，报名表附件先标注待获取。",
+      "collected_at": "2026-09-20T00:39:26.891Z",
+      "published_at": "2026-09-14T14:55:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81b4b649eaf15bcbf226.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81b4b649eaf15bcbf226.md",
+      "raw_text_sha256": "23bd81b34a738ebee274304b088db91e3832c131dcd3b77edd98c6d2788d3efb"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81bda0a1dabfd26d93ee",
+      "title": "关于集成电路与光电芯片学院廖聪维老师《基20240206高分辨率、高亮度新型微显示器件关键问题研究》项目拨付测试化验加工费的公示",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81bda0a1dabfd26d93ee?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "拟向上海芯致远集成电路有限公司支付2.5万元测试化验加工费，项目为基20240206微显示器件关键问题研究，公示期至2026年9月18日。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，法人证书附件先标注待获取。",
+      "collected_at": "2026-09-20T00:46:33.689Z",
+      "published_at": "2026-09-14T10:18:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81bda0a1dabfd26d93ee.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81bda0a1dabfd26d93ee.md",
+      "raw_text_sha256": "ac6471da5ad4aac1fd0ecb030a5b664bb1047b8e1656b170f6a3ab5c9dd157f4"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81d9bb74f145df30a143",
+      "title": "关于2026年中秋节、国庆节本科生放假调课安排的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81d9bb74f145df30a143?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "本科生中秋节9月25日至27日放假，国庆节10月1日至7日放假；2025级及以前学生按9月20日、10月10日补课，2026级新生9月20日至23日按国际周课程上课并于10月10日补课。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，无附件。",
+      "collected_at": "2026-09-20T00:51:02.593Z",
+      "published_at": "2026-09-14T09:07:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81d9bb74f145df30a143.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81d9bb74f145df30a143.md",
+      "raw_text_sha256": "c31a7b9be6e8f87ae215b08b8cae616b047c4e65494d007c3cc98681d737adec"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81dd96bfdb5118e410f6",
+      "title": "关于组织申报2026年度广东省基础与应用基础研究基金企业联合基金（公共卫生与医药健康领域）第二批项目的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81dd96bfdb5118e410f6?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-14",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2026年度公共卫生与医药健康领域省企联合基金第二批项目启动申报，重点项目资助50万元/项，面上项目资助10万元/项，申报及依托单位推荐截止至2026年10月19日17:00。",
+      "source_summary": "微信小程序「SZTU鼠鼠」→「公文通」；正文已复制，2个指南附件先标注待获取。",
+      "collected_at": "2026-09-20T00:37:58.111Z",
+      "published_at": "2026-09-14T16:59:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81dd96bfdb5118e410f6.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81dd96bfdb5118e410f6.md",
+      "raw_text_sha256": "87ba5d881674231b954119d8a3a26d3dc537d1ce63ee34fc4ead1ecc07efb0db"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81ad9252ce71bfdc48d6",
+      "title": "关于做好2026年教育事业统计工作的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81ad9252ce71bfdc48d6?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-15",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "学校启动2026年教育事业统计：快报表9月23日前、综合调查表10月14日前填报；更换统计员需在9月16日下班前提交登记表，3项附件待获取。",
+      "source_summary": "公文通｜发展规划部｜2026-09-15",
+      "collected_at": "2026-09-20T00:31:46.920Z",
+      "published_at": "2026-09-15T10:57:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81ad9252ce71bfdc48d6.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81ad9252ce71bfdc48d6.md",
+      "raw_text_sha256": "763d8a48784223c023c1d1acd605e73de1ef2f17a22fe2fe9d92c986dd15dd0d"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8132b82ccb55911cdda3",
+      "title": "关于人工智能学院博士后开题考核报告会的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8132b82ccb55911cdda3?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-16",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "人工智能学院将于9月18日15:30—16:30在C1-512会议室举行博士后开题考核报告会，主题为多变量生理时间序列因果世界模型。",
+      "source_summary": "公文通｜人工智能学院｜2026-09-16",
+      "collected_at": "2026-09-20T00:29:29.414Z",
+      "published_at": "2026-09-16T10:22:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8132b82ccb55911cdda3.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8132b82ccb55911cdda3.md",
+      "raw_text_sha256": "fdd152fa34e43e8449359153f252d848242a2fee4b63efbbe258cf2d4ed12f00"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8153b986f73591d9158e",
+      "title": "关于工程物理学院Augusto Smerzi老师《基于原子与光学系统的纠缠与机器学习增强多参数量子估计》项目拨付测试化验加工费的公示",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8153b986f73591d9158e?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-16",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "Augusto Smerzi老师项目拟向北京北龙超级云计算有限责任公司拨付量子精密测量数据处理分析费9.8万元，公示期为9月16日至22日；法人证书附件待获取。",
+      "source_summary": "公文通｜科研与校企合作部｜2026-09-16",
+      "collected_at": "2026-09-20T00:30:01.509Z",
+      "published_at": "2026-09-16T10:17:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8153b986f73591d9158e.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8153b986f73591d9158e.md",
+      "raw_text_sha256": "d64512a3911f67d51e47ed579e45229cb1cf282890f536c52e3a279182a986d1"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8158966edafa3d145a01",
+      "title": "新材料与新能源学院2025-2026学年度硕士国家奖学金、优秀研究生干部奖学金评选细则",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8158966edafa3d145a01?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-16",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "新材料与新能源学院硕士国家奖学金推荐4人、优秀研究生干部奖学金推荐2人；国家奖学金2万元/人/年，干部奖学金2000元/人/年，纸质材料9月18日12:00前交B2-916，6项附件待获取。",
+      "source_summary": "公文通｜新材料与新能源学院｜2026-09-16",
+      "collected_at": "2026-09-20T00:28:47.224Z",
+      "published_at": "2026-09-16T17:20:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8158966edafa3d145a01.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8158966edafa3d145a01.md",
+      "raw_text_sha256": "2fe6753bc92402143c50c8b628800d2e27b30b2d7be3326485a496dc98da0e55"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc817d863fc6c1eb7aa47b",
+      "title": "健康与环境工程学院2025-2026学年度硕士国家奖学金、优秀研究生干部奖学金评选细则",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc817d863fc6c1eb7aa47b?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-16",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "健康与环境工程学院按研究生院名额开展硕士国家奖学金和优秀研究生干部评选，国家奖学金2万元/人/年、干部奖学金2000元/人/年，5项附件待获取。",
+      "source_summary": "公文通｜健康与环境工程学院｜2026-09-16",
+      "collected_at": "2026-09-20T00:26:01.076Z",
+      "published_at": "2026-09-16T17:47:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc817d863fc6c1eb7aa47b.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc817d863fc6c1eb7aa47b.md",
+      "raw_text_sha256": "bb23c31ee83b1c38ba6edfdd8e091b848f4b689aba07d2fc8cda322ecebc8410"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81938ffffa9048c8f27f",
+      "title": "关于未来技术学院博士后中期考核报告会的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81938ffffa9048c8f27f?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-16",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "未来技术学院将于9月18日16:15—17:15在C1-1719会议室举行博士后中期考核报告会，主题为AI驱动光子学与超快系统。",
+      "source_summary": "公文通｜未来技术学院｜2026-09-16",
+      "collected_at": "2026-09-20T00:24:13.685Z",
+      "published_at": "2026-09-16T17:54:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81938ffffa9048c8f27f.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81938ffffa9048c8f27f.md",
+      "raw_text_sha256": "d6091cd357d435d4d1802365d12de2d1d5dfee02b4e3ef53a73fb2d44bf18c05"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8194a4c3c8bbfcf86593",
+      "title": "关于新材料与新能源学院博士后中期考核报告会的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8194a4c3c8bbfcf86593?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-16",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "新材料与新能源学院将于9月18日14:00—17:00在B2-A1001会议室举行博士后中期考核报告会，含金刚石/芯片键合、蒸发发电与CO₂光催化等3场报告。",
+      "source_summary": "公文通｜新材料与新能源学院｜2026-09-16",
+      "collected_at": "2026-09-20T00:26:46.964Z",
+      "published_at": "2026-09-16T17:30:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8194a4c3c8bbfcf86593.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8194a4c3c8bbfcf86593.md",
+      "raw_text_sha256": "9ee78cfa805be9b2f540d875b5705edd51624b2c687272c5716be64e5af6b955"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81e5ad2fd0be1c5772ff",
+      "title": "工程物理学院2025-2026学年度硕士国家奖学金、优秀研究生干部奖学金评选细则",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81e5ad2fd0be1c5772ff?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-16",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "工程物理学院硕士国家奖学金推荐4人、优秀研究生干部奖学金推荐2人；国家奖学金2万元/人/年，优秀研究生干部2000元/人/年，申请材料须于9月21日17:00前提交，6项附件待获取。",
+      "source_summary": "公文通｜工程物理学院｜2026-09-16",
+      "collected_at": "2026-09-20T00:23:34.598Z",
+      "published_at": "2026-09-16T21:12:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81e5ad2fd0be1c5772ff.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81e5ad2fd0be1c5772ff.md",
+      "raw_text_sha256": "e7942d44867c532e74f0468cd7e24f75befcc14deea1ddfd885f521b507f1c42"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc810191fef65920990618",
+      "title": "关于2026级新生军训申请缓训、补训、免训的相关通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc810191fef65920990618?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "2026级新生军训安排在10月10日至23日；申请缓训、补训或免训的学生须于9月29日17:00前提交对应申请表，免训需附二级甲等以上医院病历、诊断证明及检查资料。",
+      "source_summary": "公文通｜学生部（党委学生工作部、党委武装部）｜2026-09-17",
+      "collected_at": "2026-09-20T00:15:49.022Z",
+      "published_at": "2026-09-17T10:29:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc810191fef65920990618.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc810191fef65920990618.md",
+      "raw_text_sha256": "1006b3cdec07f06f2d210cee0d21efadf9ed38c403fddedf63530cdedc3f0e9d"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8101adf8c6aeaf37694b",
+      "title": "关于举办企业（苏州迈时光电股份有限公司、比亚迪股份有限公司）人才需求入校宣讲的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8101adf8c6aeaf37694b?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "面向2027届毕业生及感兴趣学生，9月17日在C-5教学楼举办迈时光电、比亚迪宣讲，岗位覆盖光学器件、汽车、电池、软件、材料、制造、职能等方向。",
+      "source_summary": "公文通｜学生就业指导中心｜2026-09-17",
+      "collected_at": "2026-09-20T00:17:39.809Z",
+      "published_at": "2026-09-17T10:09:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8101adf8c6aeaf37694b.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8101adf8c6aeaf37694b.md",
+      "raw_text_sha256": "de150678792cdd583ae375e2238beed0b2d2dd21a25ddf56557fcb989bf58312"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8115a878ed0da89a40a0",
+      "title": "城市交通与物流学院关于组织评选深圳技术大学2025-2026学年度硕士国家奖学金、优秀研究生干部奖学金的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8115a878ed0da89a40a0?pvs=204",
+      "original_source_url": "https://nbw.sztu.edu.cn/info/1021/52210.htm",
+      "date": "2026-09-17",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "城市交通与物流学院启动2025-2026学年度硕士国家奖学金和优秀研究生干部奖学金评选，申请材料电子、纸质版均须在9月21日17:00前提交；附件暂待获取。",
+      "source_summary": "公文通｜城市交通与物流学院｜2026-09-17",
+      "collected_at": "2026-09-20T00:12:20.425Z",
+      "published_at": "2026-09-17T15:44:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8115a878ed0da89a40a0.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8115a878ed0da89a40a0.md",
+      "raw_text_sha256": "aabf4e554e74cead098ef9b1d59335ad2c129193bea7de8a2ec82bdc58eb3fb5"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc815db0d0f1364954d7f7",
+      "title": "关于申报国家重点研发计划“国家量子科技关键材料器件设备研发”重点专项2026年度（第一批）项目的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc815db0d0f1364954d7f7?pvs=204",
+      "original_source_url": "https://service2.most.gov.cn/kjjh_tztg_all/20260917/5874.html",
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "量子科技关键材料器件设备研发重点专项2026年度第一批启动申报，拟支持35项、中央财政经费约2.2亿元，网上填报时间为2026年9月28日8\\:00至11月2日16\\:00；附件待获取。",
+      "source_summary": "公文通｜科研与校企合作部｜2026-09-17",
+      "collected_at": "2026-09-20T00:09:22.876Z",
+      "published_at": "2026-09-17T17:14:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc815db0d0f1364954d7f7.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc815db0d0f1364954d7f7.md",
+      "raw_text_sha256": "abfc234de0817d8266d714bb12fad5f4fe3c428f783beedf3f55ca3fc6ba979b"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8164964dec99dff5f2fb",
+      "title": "创意设计学院2025-2026学年度优秀研究生干部奖学金评选细则",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8164964dec99dff5f2fb?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "创意设计学院优秀研究生干部奖学金每生每年2000元，推荐名额2人；申请材料需按通知在9月17日至18日公示期间完成，相关附件待获取。",
+      "source_summary": "公文通｜创意设计学院｜2026-09-17",
+      "collected_at": "2026-09-20T00:21:02.740Z",
+      "published_at": "2026-09-17T08:37:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8164964dec99dff5f2fb.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8164964dec99dff5f2fb.md",
+      "raw_text_sha256": "f49371b94b72b85ef4bdff4000d05f8042f5ecf1adb971727657611d0188a702"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc816ba010e020be0ed1c6",
+      "title": "深圳技术大学2025-2026学年度研究生鹏程奖学金评选细则（9.17截止时间有更新）",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc816ba010e020be0ed1c6?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "鹏程奖学金每生每年10000元、共1个名额，申请截止9月17日，评审公示至9月30日。",
+      "source_summary": "SZTU鼠鼠·公文通｜研究生院｜正文已采集；2个附件待获取",
+      "collected_at": "2026-09-20T00:05:10.568Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e19f5a310dc816ba010e020be0ed1c6.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc816ba010e020be0ed1c6.md",
+      "raw_text_sha256": "1b0a4da5c754427738bc28ef579e58641d6838646d1dab356905f83001c3b575"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc8179b47ad6ebed874099",
+      "title": "深圳技术大学2025-2026学年度优秀研究生干部奖学金单列指标评选细则（9.17截止时间有更新）",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc8179b47ad6ebed874099?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "优秀研究生干部奖学金每生每年2000元，纸质材料须于9月18日12:00前提交，评审公示至9月30日。",
+      "source_summary": "SZTU鼠鼠·公文通｜研究生院｜正文已采集；4个附件待获取",
+      "collected_at": "2026-09-20T00:04:02.485Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e19f5a310dc8179b47ad6ebed874099.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc8179b47ad6ebed874099.md",
+      "raw_text_sha256": "8ba83528d8885766738a41e1bdd227f446eb9544229e1a84729e2f194df049b9"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc818f8bb5da0c5e1254b3",
+      "title": "转发《广东省教育厅关于推荐省级生涯教育与就业指导专家库专家的通知》",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc818f8bb5da0c5e1254b3?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "各学院需按三类专家重新遴选推荐，每类至少2名，填写汇总表并于9月29日前将可编辑Excel版发送至 [jobcenter@sztu.edu.cn](mailto:jobcenter@sztu.edu.cn)；附件待获取。",
+      "source_summary": "公文通｜学生就业指导中心｜2026-09-17",
+      "collected_at": "2026-09-20T00:15:10.778Z",
+      "published_at": "2026-09-17T10:52:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc818f8bb5da0c5e1254b3.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc818f8bb5da0c5e1254b3.md",
+      "raw_text_sha256": "bcf2f282926a3abc8c915adb6d447d212ac184cc1a8c44b15a591c9c61fcffb8"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81a8bda2dbcbbd98da03",
+      "title": "关于新材料与新能源学院于肖老师《面向柔性储能器件关键材料的研究》项目拨付测试化验加工费的公示",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81a8bda2dbcbbd98da03?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "于肖老师项目拟向博仕邦（南宁）技术服务有限公司拨付分子动力学及第一性原理计算费4.9万元，公示期为9月17日至23日；法人证书附件待获取。",
+      "source_summary": "公文通｜科研与校企合作部｜2026-09-17",
+      "collected_at": "2026-09-20T00:18:35.844Z",
+      "published_at": "2026-09-17T09:31:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81a8bda2dbcbbd98da03.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81a8bda2dbcbbd98da03.md",
+      "raw_text_sha256": "e2eeda9430dee17ab3a6158d642fa3f0238cfa0d30bae7f794f85605413f2cd3"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81cb8421fd6a4546fb72",
+      "title": "关于工程物理学院博士后中期考核报告会的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81cb8421fd6a4546fb72?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "工程物理学院博士后中期考核报告会将于9月18日9:30—11:30在超强激光应用技术研究中心B4-601举行，含两场短波红外量子点相关报告。",
+      "source_summary": "公文通｜工程物理学院｜2026-09-17",
+      "collected_at": "2026-09-20T00:18:07.778Z",
+      "published_at": "2026-09-17T10:00:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81cb8421fd6a4546fb72.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81cb8421fd6a4546fb72.md",
+      "raw_text_sha256": "d52d16aaca87d1601560d432dc0ed9dfb41890f5c91a48095a65755a94fb4a42"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81d29be0f2e11b663d2f",
+      "title": "关于工程物理学院荣瑶老师《大雷诺数磁流体问题的数值算法研究》项目拨付测试化验加工费的公示",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81d29be0f2e11b663d2f?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "荣瑶老师项目拟向北京北龙超级云计算有限责任公司拨付高性能超算机时和技术服务费9.9万元，公示期为9月17日至23日；法人证书附件待获取。",
+      "source_summary": "公文通｜科研与校企合作部｜2026-09-17",
+      "collected_at": "2026-09-20T00:19:07.648Z",
+      "published_at": "2026-09-17T09:28:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81d29be0f2e11b663d2f.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81d29be0f2e11b663d2f.md",
+      "raw_text_sha256": "1393df1e86a55aebf6573b032c0dc0cb25171116f580aeeff0de493480ab8a31"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81f4822be07d3c8d8c4b",
+      "title": "图书馆关于2026年中秋节、国庆节开馆安排的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81f4822be07d3c8d8c4b?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "参考资料",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "中秋节、国庆节假期图书馆正常开放：周一至周六8:30—22:30，周日8:30—21:00；2—6楼及103、111、116、206自修室照常开放。",
+      "source_summary": "公文通｜图书馆｜2026-09-17",
+      "collected_at": "2026-09-20T00:13:13.558Z",
+      "published_at": "2026-09-17T14:50:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81f4822be07d3c8d8c4b.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81f4822be07d3c8d8c4b.md",
+      "raw_text_sha256": "0bb28f277489b25f31a5851c9da860e21fadf5bb9664a409dfe8fe786bc67e48"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81f5a277cc9a2b5b81d8",
+      "title": "关于召开教学工作研讨会的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81f5a277cc9a2b5b81d8?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-17",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "教务部定于2026年9月18日14:30在C-3行政楼1608会议室召开教学工作研讨会，相关单位负责人参会。",
+      "source_summary": "公文通｜教务部｜2026-09-17",
+      "collected_at": "2026-09-20T00:10:02.934Z",
+      "published_at": "2026-09-17T17:01:00+08:00",
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81f5a277cc9a2b5b81d8.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81f5a277cc9a2b5b81d8.md",
+      "raw_text_sha256": "608d9f3d912f799eabc0f06aef67298f4bd26a72a89ed8c3ff00012e9484660d"
+    },
+    {
+      "id": "notion_wechat_3df9f5a310dc81768cacc3e7208ea980",
+      "title": "图书馆开通 ICSD、CNRDS、知网 AI 等数据库",
+      "notion_url": "https://app.notion.com/p/3df9f5a310dc81768cacc3e7208ea980?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "图书馆通知：学校已开通多项学术与研究数据库访问权限，面向师生使用。",
+      "source_summary": "SZTU 鼠鼠小程序内“图书馆”通知截图；尚未取得可公开访问链接。",
+      "collected_at": "2026-09-18T02:09:24.542Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3df9f5a310dc81768cacc3e7208ea980.json",
+      "markdown": "notices/notion_wechat_3df9f5a310dc81768cacc3e7208ea980.md",
+      "raw_text_sha256": "e52fc56af08652365081208584414b659e4a293f475734b855bb60a1049f0e5a"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc813cbab2c44b336d4c63",
+      "title": "关于近期国家自然科学基金项目申报信息汇总的温馨提示（9月18日有更新）",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc813cbab2c44b336d4c63?pvs=204",
+      "original_source_url": "http://grants.nsfc.gov.cn",
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "科研与校企合作部汇总了截至9月18日的国家自然科学基金项目指南，新增项目和截止时间需登录基金系统核对。",
+      "source_summary": "SZTU鼠鼠·公文通｜科研与校企合作部｜31屏正文与表格已采集",
+      "collected_at": "2026-09-19T23:47:17.278Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc813cbab2c44b336d4c63.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc813cbab2c44b336d4c63.md",
+      "raw_text_sha256": "4e2f931cfaf6c3f054674cfb3f604e9d0a72bcadd214ba47fc099567a309342f"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc813e8b65c1525bb842c6",
+      "title": "关于工程物理学院冀烨老师《铁电斯格明子晶格的超快动力学与多场调控机制研究》项目拨付测试化验加工费的公示",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc813e8b65c1525bb842c6?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "工程物理学院项目拟拨付9.8万元测试化验加工费，公示期为9月18日至9月24日。",
+      "source_summary": "SZTU鼠鼠·公文通｜科研与校企合作部｜正文已采集",
+      "collected_at": "2026-09-19T23:49:02.503Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc813e8b65c1525bb842c6.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc813e8b65c1525bb842c6.md",
+      "raw_text_sha256": "ad8afdff645707ad5abebd1e441394a7a7f59b3423f44a8afd431546e293c598"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc816f99dbdb6c0b0b4db8",
+      "title": "关于发布广东省科技厅2027年度粤澳科技创新联合资助专题申报指南的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc816f99dbdb6c0b0b4db8?pvs=204",
+      "original_source_url": "http://pro.gdstc.gd.gov.cn/egrantweb",
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "2027年度粤澳科技创新联合资助专题开放申报，网上申报截止2026年11月10日17:00。",
+      "source_summary": "SZTU鼠鼠·公文通｜科研与校企合作部｜4屏正文已采集",
+      "collected_at": "2026-09-19T23:48:21.929Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc816f99dbdb6c0b0b4db8.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc816f99dbdb6c0b0b4db8.md",
+      "raw_text_sha256": "46f14833b6dfb67d647974ae8c9e59ef9faf5b2c034d48b3a1ed098a856a58e6"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc8173b5c5ffe0114c1818",
+      "title": "关于举办企业（TCL华星光电技术有限公司）人才需求入校宣讲的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc8173b5c5ffe0114c1818?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "9月20日16:00在C-5教学楼107举行TCL华星宣讲，面向2027届及感兴趣学生，宣讲后有现场面试。",
+      "source_summary": "SZTU鼠鼠·公文通｜学生就业指导中心｜正文已按页面采集",
+      "collected_at": "2026-09-19T15:57:18.247Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc8173b5c5ffe0114c1818.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc8173b5c5ffe0114c1818.md",
+      "raw_text_sha256": "b48e35313055053a4df8810583e5f51820cc69b968d725cd00970c2fb9f029bb"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc818c8109f006860e310e",
+      "title": "关于举办2026年入党积极分子培训班的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc818c8109f006860e310e?pvs=204",
+      "original_source_url": "http://www.uucps.edu.cn",
+      "date": "2026-09-18",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "入党积极分子培训于9月21日至10月12日进行，学生需完成不少于24学时并参加研讨、心得和考试。",
+      "source_summary": "SZTU鼠鼠·公文通｜党委组织部（党校）｜正文已采集；附件：积极分子参训名单.xlsx（待获取）",
+      "collected_at": "2026-09-19T23:58:56.704Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc818c8109f006860e310e.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc818c8109f006860e310e.md",
+      "raw_text_sha256": "edc1248b040c8ca5e9b8503a9da165082539bc99c5d323cd9acb89d5562a7cd0"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc81939f97d0ed02264b86",
+      "title": "关于对国家重点研发计划“科技基础条件自主保障能力提升”重点专项2026年度项目申报指南建议征求意见的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc81939f97d0ed02264b86?pvs=204",
+      "original_source_url": "https://service.most.gov.cn/",
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "项目"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "“科技基础条件自主保障能力提升”专项公开征求意见，反馈截止9月21日18:00。",
+      "source_summary": "SZTU鼠鼠·公文通｜科研与校企合作部｜正文已采集",
+      "collected_at": "2026-09-19T23:59:56.331Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc81939f97d0ed02264b86.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc81939f97d0ed02264b86.md",
+      "raw_text_sha256": "75ceca75229dc9edf82d58b74430519b803dd94b63eabae074e75ad2f59b8a84"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc8195ac69ead4b919ee5f",
+      "title": "关于举办2026年第三期党员发展对象培训班的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc8195ac69ead4b919ee5f?pvs=204",
+      "original_source_url": "http://www.uucps.edu.cn",
+      "date": "2026-09-18",
+      "type": "流程",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "第三期党员发展对象培训于9月21日至30日进行，含24学时课程、研讨、思想汇报和在线考试。",
+      "source_summary": "SZTU鼠鼠·公文通｜党委组织部（党校）｜正文已采集",
+      "collected_at": "2026-09-19T23:51:24.146Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc8195ac69ead4b919ee5f.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc8195ac69ead4b919ee5f.md",
+      "raw_text_sha256": "a4e57ee734954e9d61f9741d297d0afe88879da2bd974f74047149e987ba53f8"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc81d09e69e7355dc74670",
+      "title": "关于举办“初创企业的股权融资与股权设计”讲座的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc81d09e69e7355dc74670?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "9月23日14:30在公共教学楼C5-102举办初创企业股权融资与设计讲座，面向感兴趣师生。",
+      "source_summary": "SZTU鼠鼠·公文通｜城市交通与物流学院｜正文已采集",
+      "collected_at": "2026-09-19T23:49:57.454Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc81d09e69e7355dc74670.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc81d09e69e7355dc74670.md",
+      "raw_text_sha256": "285b974bccea26c91d340ead8fa02acb11f1b35db245bef507fa8788b74cb00e"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc81db9653f020906838e3",
+      "title": "关于召开2026年教育事业统计工作校内培训会的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc81db9653f020906838e3?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-18",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "9月20日10:30在C3行政楼402召开教育事业统计培训，相关部门统计员须参加。",
+      "source_summary": "SZTU鼠鼠·公文通｜发展规划部｜正文已采集",
+      "collected_at": "2026-09-19T23:50:38.832Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc81db9653f020906838e3.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc81db9653f020906838e3.md",
+      "raw_text_sha256": "6fd28d16e618e091ee6a34a22ca202e0ed62ef3db3db2982e2e1b4bd5005ccc4"
+    },
+    {
+      "id": "notion_wechat_3e09f5a310dc81efbbafc38c23858166",
+      "title": "关于对“十五五”国家重点研发计划“先进生物治疗技术”重点专项2026年度项目申报指南建议征求意见的通知",
+      "notion_url": "https://app.notion.com/p/3e09f5a310dc81efbbafc38c23858166?pvs=204",
+      "original_source_url": "https://service.most.gov.cn/",
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "已整理",
+      "conclusion": "“先进生物治疗技术”重点专项2026年度指南公开征求意见，校内需在9月22日18:00前反馈。",
+      "source_summary": "SZTU鼠鼠·公文通｜科研与校企合作部｜正文已按页面采集",
+      "collected_at": "2026-09-19T15:58:19.017Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e09f5a310dc81efbbafc38c23858166.json",
+      "markdown": "notices/notion_wechat_3e09f5a310dc81efbbafc38c23858166.md",
+      "raw_text_sha256": "29bf986422db30927af9d68e9401fd7d526f34eb983a7234d37421b5871072a0"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc818baa79e10f6f19022e",
+      "title": "关于举办“智行讲坛”（第三十八期）的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc818baa79e10f6f19022e?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-18",
+      "type": "参考资料",
+      "topics": [
+        "学习"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "9月21日10:00在D1-502举办第38期智行讲坛，主题为科学基金项目写作要点分析。",
+      "source_summary": "SZTU鼠鼠·公文通｜城市交通与物流学院｜正文已采集；附件：智行讲坛海报.jpg（待获取）",
+      "collected_at": "2026-09-20T00:00:40.797Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e19f5a310dc818baa79e10f6f19022e.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc818baa79e10f6f19022e.md",
+      "raw_text_sha256": "31ea51abf6458b03e1dccc9e6820985b996260a7efe31ebc8d576bad96b6da2c"
+    },
+    {
+      "id": "notion_wechat_3e19f5a310dc81b58038d8357955705b",
+      "title": "关于转发《广东省教育厅关于开展2027年学校体育美育卫生国防教育项目征集工作的通知》的通知",
+      "notion_url": "https://app.notion.com/p/3e19f5a310dc81b58038d8357955705b?pvs=204",
+      "original_source_url": null,
+      "date": "2026-09-18",
+      "type": "流程",
+      "topics": [
+        "运营"
+      ],
+      "organization_status": "待整理",
+      "conclusion": "相关项目申报材料须在2026年10月8日前报送省厅指定邮箱并向教务部报备。",
+      "source_summary": "SZTU鼠鼠·公文通｜教务部｜正文已采集；9个附件待获取",
+      "collected_at": "2026-09-20T00:03:04.557Z",
+      "published_at": null,
+      "raw_json": "raw/notion_wechat_3e19f5a310dc81b58038d8357955705b.json",
+      "markdown": "notices/notion_wechat_3e19f5a310dc81b58038d8357955705b.md",
+      "raw_text_sha256": "b4f51cd9f7fcf510fe3694b8d9a798984a0486473af84b9e3c146e60a640365b"
+    }
+  ]
+}
