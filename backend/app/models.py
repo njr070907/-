@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, String, Text
+from sqlalchemy import Boolean, DateTime, JSON, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.app.db import Base
@@ -25,3 +25,11 @@ class Notice(Base):
     source_type: Mapped[str] = mapped_column(String(50), default="manual_copy")
     parse_status: Mapped[str] = mapped_column(String(50), default="raw")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+    audience_roles: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
+    colleges: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
+    majors: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
+    grades: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
+    tags: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
+    deadline: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    importance: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    required: Mapped[bool | None] = mapped_column(Boolean, nullable=True)

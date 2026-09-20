@@ -11,6 +11,14 @@ class NoticeFields(BaseModel):
     published_at: datetime | None = None
     collected_by: str | None = None
     collected_at: datetime | None = None
+    audience_roles: list[str] | None = None
+    colleges: list[str] | None = None
+    majors: list[str] | None = None
+    grades: list[str] | None = None
+    tags: list[str] | None = None
+    deadline: datetime | None = None
+    importance: str | None = None
+    required: bool | None = None
 
     @field_validator("raw_text")
     @classmethod
@@ -37,6 +45,14 @@ class NoticeSummary(BaseModel):
     published_at: datetime | None
     source_type: str
     parse_status: str
+    audience_roles: list[str] | None = None
+    colleges: list[str] | None = None
+    majors: list[str] | None = None
+    grades: list[str] | None = None
+    tags: list[str] | None = None
+    deadline: datetime | None = None
+    importance: str | None = None
+    required: bool | None = None
 
 
 class NoticeDetail(NoticeSummary):

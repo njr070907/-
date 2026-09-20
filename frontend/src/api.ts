@@ -5,6 +5,17 @@ export type NoticeSummary = {
   published_at: string | null
   source_type: string
   parse_status: string
+  audience_roles?: string[] | null
+  colleges?: string[] | null
+  majors?: string[] | null
+  grades?: string[] | null
+  tags?: string[] | null
+  category?: string | null
+  summary?: string | null
+  description?: string | null
+  deadline?: string | null
+  importance?: string | null
+  required?: boolean | null
 }
 
 export type NoticeDetail = NoticeSummary & {
@@ -25,6 +36,6 @@ async function getJson<T>(path: string): Promise<T> {
 }
 
 export const getHealth = () => getJson<{ status: string }>('/health')
-export const getNotices = () => getJson<NoticeSummary[]>('/api/notices')
+export const getNotices = (query = '') => getJson<NoticeSummary[]>(`/api/notices${query ? `?query=${encodeURIComponent(query)}` : ''}`)
 export const getNotice = (id: string) =>
   getJson<NoticeDetail>(`/api/notices/${encodeURIComponent(id)}`)

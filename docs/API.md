@@ -10,6 +10,8 @@
 
 返回数据库中的通知摘要，默认不含正文。可用 `?query=MVP` 在标题或原文中做基本关键词搜索。
 
+摘要与详情额外返回可为空的个性化元数据：`audience_roles`、`colleges`、`majors`、`grades`、`tags`（字符串数组），`deadline`（ISO 时间），`importance`（字符串）和 `required`（布尔值）。缺失或空数组代表未限定适用范围。`published_at` 和 `source_name` 继续作为发布时间与来源，不重复创建字段。
+
 ```json
 [
   {
@@ -30,6 +32,8 @@
 ## POST /api/notices
 
 手动创建通知。只要求非空 `raw_text`；其他字段可省略或传 `null`。可选时间字段为 `published_at`、`collected_at`。服务端生成 `id`，设置 `source_type=manual_copy` 和 `parse_status=raw`。
+
+创建时也可以传上述个性化元数据，例如 `{"raw_text":"演示","audience_roles":["teacher"],"tags":["教务"],"required":true}`。
 
 ```http
 POST /api/notices
