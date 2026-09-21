@@ -1,4 +1,5 @@
 import { FormEvent, ReactNode, useEffect, useMemo, useState } from 'react'
+import { SlidingIndicator } from './SlidingIndicator'
 
 import {
   compareMatterNotices,
@@ -341,9 +342,12 @@ function App({ embedded = false }: { embedded?: boolean }) {
       <aside className="side-rail" aria-label="主导航">
         <Brand connected={connected} />
         <nav className="nav-list">
+          {embedded && <SlidingIndicator activeKey={view} className="workflow-nav-indicator" />}
           {(Object.keys(viewMeta) as View[]).map((item) => (
             <button
+              aria-current={view === item ? 'page' : undefined}
               className={view === item ? 'nav-item is-active' : 'nav-item'}
+              data-motion-key={item}
               key={item}
               onClick={() => navigate(item)}
               type="button"
