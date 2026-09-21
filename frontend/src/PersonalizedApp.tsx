@@ -165,7 +165,7 @@ export default function PersonalizedApp() {
   if (screen === 'workflow') return <div className="personalized-root suite-workflow">
     <SiteHeader profile={profile} active="workflow" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
     <main className="workflow-dashboard"><WorkflowApp embedded /></main>
-    <footer>校事清 · 本地演示版本 · 演示通知并非校方真实公告</footer>
+    <footer>校事清 · 本地演示版本 · 历史归档不代表当前有效通知，请核对原文</footer>
   </div>
 
   return <div className="personalized-root"><div className="app-shell">
@@ -181,6 +181,6 @@ export default function PersonalizedApp() {
           {loadingNotices ? <div className="empty-state">正在整理校园信息…</div> : visible.length ? <div className="notice-list">{visible.map((item, index) => <NoticeCard key={item.notice.id} item={item} index={index} animate={animateCards} onOpen={id => void openNotice(id)} />)}</div> : <div className="empty-state"><strong>{query ? '没有找到相关信息' : renderedTab === 'upcoming' ? '近期暂无截止事项' : '暂无校园信息'}</strong><p>可以调整搜索词，或切换到「全部信息」查看。</p></div>}
         </div>
       </>}
-    </main><footer>校事清 · 本地演示版本 · 演示通知并非校方真实公告</footer>
+    </main><footer>校事清 · 本地演示版本 · 历史归档不代表当前有效通知，请核对原文</footer>
   </div></div>
 }

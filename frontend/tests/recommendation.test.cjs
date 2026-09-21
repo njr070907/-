@@ -7,9 +7,14 @@ const path = require('node:path')
 
 const outputDir = fs.mkdtempSync(path.join(os.tmpdir(), 'xsq-recommendation-'))
 execFileSync(process.execPath, [path.join(process.cwd(), 'node_modules/typescript/bin/tsc'), '--ignoreConfig', '--target', 'es2022', '--module', 'commonjs', '--noCheck', '--outDir', outputDir, 'src/recommendation.ts', 'src/user.ts'])
-const { calculateRelevance, rankNotices, upcomingNotices } = require(path.join(outputDir, 'recommendation.js'))
-const { COLLEGES, UNDERGRAD_MAJOR_MAP, GRADUATE_PROGRAM_MAP, SPECIAL_PROGRAM_MAP, getPrograms } = require(path.join(outputDir, 'sztuAcademicData.js'))
-const { validateKeyword } = require(path.join(outputDir, 'keywordUtils.js'))
+const emitted = name => {
+  const relativePath = fs.readdirSync(outputDir, { recursive: true }).find(candidate => path.basename(candidate) === name)
+  if (!relativePath) throw new Error(`TypeScript did not emit ${name}`)
+  return path.join(outputDir, relativePath)
+}
+const { calculateRelevance, rankNotices, upcomingNotices } = require(emitted('recommendation.js'))
+const { COLLEGES, UNDERGRAD_MAJOR_MAP, GRADUATE_PROGRAM_MAP, SPECIAL_PROGRAM_MAP, getPrograms } = require(emitted('sztuAcademicData.js'))
+const { validateKeyword } = require(emitted('keywordUtils.js'))
 fs.rmSync(outputDir, { recursive: true, force: true })
 const now = new Date('2026-09-20T08:00:00Z')
 const profile = { id: 'a', email: 'a@example.test', displayName: 'A', role: 'undergraduate', college: '工程物理学院', major: '智能感知工程', grade: '2024级', interests: ['竞赛'] }

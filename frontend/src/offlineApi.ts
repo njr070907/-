@@ -12,7 +12,7 @@ import type {
 import { createOfflineSeedNotices } from './offlineSeeds'
 
 type OfflineState = { notices: NoticeDetail[]; matters: MatterSummary[]; tasks: Task[] }
-const storageKey = 'xiaoshiqing.offline.v2'
+const storageKey = 'xiaoshiqing.offline.v3'
 let volatileState: OfflineState | null = null
 
 function initialState(): OfflineState {

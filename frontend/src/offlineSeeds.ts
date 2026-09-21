@@ -1,4 +1,35 @@
 import type { NoticeDetail } from './api'
+import archiveManifest from '../../data/notion_wechat/manifest.json'
+
+type ArchiveRaw = {
+  id: string
+  title: string
+  source_name: string | null
+  source_url: string | null
+  published_at: string | null
+  collected_by: string | null
+  collected_at: string | null
+  raw_text: string
+}
+
+type ArchiveMetadata = {
+  id: string
+  type: string
+  topics: string[]
+  organization_status: string
+  conclusion: string
+  original_source_url: string | null
+  published_at: string | null
+}
+
+const archiveRawModules = import.meta.glob('../../data/notion_wechat/raw/*.json', {
+  eager: true,
+  import: 'default',
+}) as Record<string, ArchiveRaw>
+
+const archiveMetadata = new Map(
+  (archiveManifest.records as ArchiveMetadata[]).map(record => [record.id, record]),
+)
 
 type Seed = {
   id: string
@@ -39,7 +70,7 @@ const isoAtDayOffset = (offset: number, hour: number) => {
 }
 
 export function createOfflineSeedNotices(): NoticeDetail[] {
-  return seeds.map((seed, index) => ({
+  const demoNotices = seeds.map((seed, index) => ({
     id: seed.id,
     title: seed.title,
     raw_text: seed.rawText,
@@ -65,5 +96,40 @@ export function createOfflineSeedNotices(): NoticeDetail[] {
     imported_at: isoAtDayOffset(0, 8),
     created_at: isoAtDayOffset(0, 8),
     extracted_json: null,
-  }))
+  })) satisfies NoticeDetail[]
+
+  const archiveNotices = Object.values(archiveRawModules).map(raw => {
+    const metadata = archiveMetadata.get(raw.id)
+    const publishedAt = metadata?.published_at ?? raw.published_at
+    const collectedAt = raw.collected_at ?? new Date(0).toISOString()
+    return {
+      id: raw.id,
+      title: raw.title,
+      raw_text: raw.raw_text,
+      source_name: raw.source_name || '微信知识库归档',
+      source_url: raw.source_url ?? metadata?.original_source_url ?? null,
+      published_at: publishedAt,
+      source_type: 'notion_wechat_archive',
+      parse_status: 'raw' as const,
+      matter_id: null,
+      audience_roles: null,
+      colleges: null,
+      majors: null,
+      grades: null,
+      tags: metadata?.topics ?? [],
+      category: metadata?.type ?? null,
+      summary: metadata?.conclusion ?? null,
+      description: raw.raw_text,
+      deadline: null,
+      importance: 'normal',
+      required: false,
+      collected_by: raw.collected_by,
+      collected_at: raw.collected_at,
+      imported_at: collectedAt,
+      created_at: collectedAt,
+      extracted_json: null,
+    }
+  }) satisfies NoticeDetail[]
+
+  return [...demoNotices, ...archiveNotices]
 }
