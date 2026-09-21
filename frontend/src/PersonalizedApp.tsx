@@ -5,6 +5,8 @@ import { authService } from './auth'
 import { AuthScreen } from './AuthScreen'
 import { ensureDemoUsers } from './demo'
 import { ProfileForm } from './ProfileForm'
+import { ScrollToTop } from './ScrollToTop'
+import { SlidingIndicator } from './SlidingIndicator'
 import { profileRepository } from './profiles'
 import { calculateRelevance, rankNotices, upcomingNotices, type Recommendation } from './recommendation'
 import { isProfileComplete, roleLabels, type Session, type UserProfile } from './user'
@@ -43,9 +45,10 @@ function SiteHeader({ profile, active, onBrowse, onWorkflow, onProfile, onLogout
   return <header className="site-header"><div className="header-inner">
     <button className="brand" onClick={onBrowse} type="button"><span className="brand-mark small">清</span><span>校事清</span></button>
     <nav aria-label="主导航">
-      <button aria-current={active === 'feed' ? 'page' : undefined} className={active === 'feed' ? 'nav-active' : ''} onClick={onBrowse} type="button">信息广场</button>
-      <button aria-current={active === 'workflow' ? 'page' : undefined} className={active === 'workflow' ? 'nav-active' : ''} onClick={onWorkflow} type="button">办事工作台</button>
-      <button aria-current={active === 'profile' ? 'page' : undefined} className={active === 'profile' ? 'nav-active' : ''} onClick={onProfile} type="button">个人中心</button>
+      <SlidingIndicator activeKey={active} className="site-nav-indicator" />
+      <button aria-current={active === 'feed' ? 'page' : undefined} className={active === 'feed' ? 'nav-active' : ''} data-motion-key="feed" onClick={onBrowse} type="button">信息广场</button>
+      <button aria-current={active === 'workflow' ? 'page' : undefined} className={active === 'workflow' ? 'nav-active' : ''} data-motion-key="workflow" onClick={onWorkflow} type="button">办事工作台</button>
+      <button aria-current={active === 'profile' ? 'page' : undefined} className={active === 'profile' ? 'nav-active' : ''} data-motion-key="profile" onClick={onProfile} type="button">个人中心</button>
     </nav>
     <div className="header-user"><span className="avatar">{profile.displayName.slice(0, 1)}</span><span>{profile.displayName}</span><button className="logout" onClick={onLogout} type="button">退出</button></div>
   </div></header>
@@ -164,20 +167,13 @@ export default function PersonalizedApp() {
   const openWorkflow = () => { setSelected(null); setEditing(false); setScreen('workflow'); window.scrollTo({ top: 0, behavior: 'auto' }) }
   const openProfile = () => { setSelected(null); setEditing(true); window.scrollTo({ top: 0, behavior: 'auto' }) }
 
-  if (editing) return <div className="personalized-root"><div className="app-shell">
-    <SiteHeader profile={profile} active="profile" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
-    <ProfileForm session={session} initial={profile} inApp onSave={value => { setProfile(value); resetToBrowse() }} onCancel={resetToBrowse} />
-  </div></div>
+  const activeScreen: HeaderScreen = editing ? 'profile' : screen
 
-  if (screen === 'workflow') return <div className="personalized-root suite-workflow">
-    <SiteHeader profile={profile} active="workflow" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
-    <main className="workflow-dashboard"><WorkflowApp embedded /></main>
-    <footer>校事清 · 本地演示版本 · 历史归档不代表当前有效通知，请核对原文</footer>
-  </div>
-
-  return <div className="personalized-root"><div className="app-shell">
-    <SiteHeader profile={profile} active="feed" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
-    <main className="dashboard">
+  return <div className={'personalized-root ' + (screen === 'workflow' && !editing ? 'suite-workflow' : '')}><div className="app-shell">
+    <SiteHeader profile={profile} active={activeScreen} onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
+    {editing ? <div className="page-surface" key="profile">
+      <ProfileForm session={session} initial={profile} inApp onSave={value => { setProfile(value); resetToBrowse() }} onCancel={resetToBrowse} />
+    </div> : screen === 'workflow' ? <main className="workflow-dashboard page-surface" key="workflow"><WorkflowApp embedded /></main> : <main className="dashboard page-surface" key="feed">
       {selected ? <><button className="back-button" onClick={returnFromDetail}>← 返回信息列表</button><article className="detail-card"><span className="eyebrow">NOTICE DETAIL</span><h1>{selected.title || '未提供标题'}</h1><div className="detail-meta"><span>来源：{selected.source_name || '未提供'}</span><span>发布时间：{dateLabel(selected.published_at) || '未提供'}</span>{selected.deadline && <span>截止日期：{dateLabel(selected.deadline)}</span>}</div><pre>{selected.raw_text}</pre>{selected.source_url && <a href={selected.source_url} target="_blank" rel="noreferrer">查看原始来源 ↗</a>}</article></> : <>
         <section className="welcome"><div><span className="eyebrow">YOUR CAMPUS, IN FOCUS</span><h1>你好，{profile.displayName}<span className="wave"> ✦</span></h1><p>根据你的{roleLabels[profile.role]}身份、{profile.college}和关注方向，为你整理今天值得留意的校园信息。</p></div><div className="welcome-stat"><strong>{notices.length}</strong><span>条校园信息</span><small className={connected ? 'online' : 'offline'}>● {connected ? '数据已连接' : '数据暂未连接'}</small></div></section>
         <section className="browse-heading"><div><span className="eyebrow">CAMPUS UPDATES</span><h2>信息浏览</h2></div><button className="profile-link" onClick={() => setEditing(true)}>调整我的关注 →</button></section>
@@ -188,6 +184,8 @@ export default function PersonalizedApp() {
           {loadingNotices ? <div className="empty-state">正在整理校园信息…</div> : visible.length ? <div className="notice-list">{visible.map((item, index) => <NoticeCard key={item.notice.id} item={item} index={index} animate={animateCards} onOpen={id => void openNotice(id)} />)}</div> : <div className="empty-state"><strong>{query ? '没有找到相关信息' : renderedTab === 'upcoming' ? '近期暂无截止事项' : '暂无校园信息'}</strong><p>可以调整搜索词，或切换到「全部信息」查看。</p></div>}
         </div>
       </>}
-    </main><footer>校事清 · 本地演示版本 · 历史归档不代表当前有效通知，请核对原文</footer>
+    </main>}
+    {!editing && <footer>校事清 · 本地演示版本 · 历史归档不代表当前有效通知，请核对原文</footer>}
+    <ScrollToTop />
   </div></div>
 }
