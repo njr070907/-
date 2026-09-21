@@ -114,9 +114,11 @@ export type NoticeConfirmInput = {
   task?: TaskDraft
 }
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').replace(/\/$/, '')
+const offlineMode = import.meta.env.VITE_OFFLINE_MODE === 'true' || window.location.protocol === 'file:'
 
 async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
+  if (offlineMode) return offlineRequest<T>(path, init)
   const response = await fetch(`${apiBaseUrl}${path}`, {
     ...init,
     headers: {
@@ -192,3 +194,4 @@ export const updateTask = (id: string, completed: boolean) =>
     method: 'PATCH',
     body: JSON.stringify({ completed }),
   })
+import { offlineRequest } from './offlineApi'

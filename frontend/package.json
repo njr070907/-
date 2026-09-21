@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "build:offline": "tsc --noEmit && vite build --mode offline --outDir dist-offline && node ../scripts/inline-offline-build.mjs",
     "test": "vitest run && node --test tests/*.test.cjs",
     "preview": "vite preview"
   },

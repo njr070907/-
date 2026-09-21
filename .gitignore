@@ -4,6 +4,7 @@
 **/.env.*
 !.env.example
 !**/.env.example
+!frontend/.env.offline
 **/.venv/
 **/__pycache__/
 .pytest_cache/
@@ -13,6 +14,7 @@
 *.sqlite3
 frontend/node_modules/
 frontend/dist/
+frontend/dist-offline/
 *.log
 .DS_Store
 .idea/
