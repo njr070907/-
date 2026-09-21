@@ -7,11 +7,12 @@ import { interestOptions, roleLabels, type Session, type UserProfile, type UserR
 
 const roleOptions: AcademicOption[] = Object.entries(roleLabels).map(([id, displayName]) => ({ id, displayName }))
 
-export function ProfileForm({ session, initial, onSave, onCancel }: {
+export function ProfileForm({ session, initial, onSave, onCancel, inApp = false }: {
   session: Session
   initial: UserProfile | null
   onSave: (profile: UserProfile) => void
   onCancel?: () => void
+  inApp?: boolean
 }) {
   const [name, setName] = useState(initial?.displayName ?? '')
   const [role, setRole] = useState<UserRole>(initial?.role ?? 'undergraduate')
@@ -100,8 +101,8 @@ export function ProfileForm({ session, initial, onSave, onCancel }: {
     } catch (cause) { setError(cause instanceof Error ? cause.message : '保存失败') }
   }
 
-  return <main className="profile-layout"><section className="profile-card">
-    <div className="brand-line"><div className="brand-mark small">清</div><span>校事清</span></div>
+  return <main className={'profile-layout' + (inApp ? ' in-app' : '')}><section className="profile-card">
+    {!inApp && <div className="brand-line"><div className="brand-mark small">清</div><span>校事清</span></div>}
     <span className="eyebrow">{initial ? 'PERSONAL PROFILE' : 'FIRST TIME SETUP'}</span>
     <h1>{initial ? '修改个人资料' : '先认识一下你'}</h1>
     <p className="muted">身份、学院和专业用于排列与你相关的校园信息。资料只保存在此浏览器中。</p>

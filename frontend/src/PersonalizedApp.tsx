@@ -11,6 +11,7 @@ import { isProfileComplete, roleLabels, type Session, type UserProfile } from '.
 
 type Tab = 'recommended' | 'all' | 'upcoming'
 type Screen = 'feed' | 'workflow'
+type HeaderScreen = Screen | 'profile'
 const tabLabels: Record<Tab, string> = { recommended: '为你推荐', all: '全部信息', upcoming: '即将截止' }
 const priorityLabels = { HIGH: '优先处理', MEDIUM: '与你相关', NORMAL: '一般信息' }
 
@@ -33,7 +34,7 @@ function NoticeCard({ item, onOpen, index, animate }: { item: Recommendation; on
 
 function SiteHeader({ profile, active, onBrowse, onWorkflow, onProfile, onLogout }: {
   profile: UserProfile
-  active: Screen
+  active: HeaderScreen
   onBrowse: () => void
   onWorkflow: () => void
   onProfile: () => void
@@ -44,7 +45,7 @@ function SiteHeader({ profile, active, onBrowse, onWorkflow, onProfile, onLogout
     <nav aria-label="主导航">
       <button aria-current={active === 'feed' ? 'page' : undefined} className={active === 'feed' ? 'nav-active' : ''} onClick={onBrowse} type="button">信息广场</button>
       <button aria-current={active === 'workflow' ? 'page' : undefined} className={active === 'workflow' ? 'nav-active' : ''} onClick={onWorkflow} type="button">办事工作台</button>
-      <button onClick={onProfile} type="button">个人中心</button>
+      <button aria-current={active === 'profile' ? 'page' : undefined} className={active === 'profile' ? 'nav-active' : ''} onClick={onProfile} type="button">个人中心</button>
     </nav>
     <div className="header-user"><span className="avatar">{profile.displayName.slice(0, 1)}</span><span>{profile.displayName}</span><button className="logout" onClick={onLogout} type="button">退出</button></div>
   </div></header>
@@ -132,6 +133,7 @@ export default function PersonalizedApp() {
     setHasSwitchedTab(false)
     setAnimateCards(true)
     setSelected(null)
+    setEditing(false)
     setScreen('feed')
     window.scrollTo({ top: 0, behavior: 'auto' })
   }
@@ -149,7 +151,7 @@ export default function PersonalizedApp() {
 
   if (!ready) return <div className="personalized-root"><main className="loading-screen">正在打开校事清…</main></div>
   if (!session) return <div className="personalized-root"><AuthScreen onAuthenticated={value => { setSession(value); setProfile(profileRepository.get(value.userId)); resetToBrowse() }} /></div>
-  if (!isProfileComplete(profile) || editing) return <div className="personalized-root"><ProfileForm session={session} initial={profile} onSave={value => { setProfile(value); setEditing(false); resetToBrowse() }} onCancel={isProfileComplete(profile) ? () => { setEditing(false); resetToBrowse() } : undefined} /></div>
+  if (!isProfileComplete(profile)) return <div className="personalized-root"><ProfileForm session={session} initial={profile} onSave={value => { setProfile(value); resetToBrowse() }} /></div>
 
   const logout = () => {
     authService.logout()
@@ -159,8 +161,13 @@ export default function PersonalizedApp() {
     setScreen('feed')
   }
 
-  const openWorkflow = () => { setSelected(null); setScreen('workflow'); window.scrollTo({ top: 0, behavior: 'auto' }) }
+  const openWorkflow = () => { setSelected(null); setEditing(false); setScreen('workflow'); window.scrollTo({ top: 0, behavior: 'auto' }) }
   const openProfile = () => { setSelected(null); setEditing(true); window.scrollTo({ top: 0, behavior: 'auto' }) }
+
+  if (editing) return <div className="personalized-root"><div className="app-shell">
+    <SiteHeader profile={profile} active="profile" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
+    <ProfileForm session={session} initial={profile} inApp onSave={value => { setProfile(value); resetToBrowse() }} onCancel={resetToBrowse} />
+  </div></div>
 
   if (screen === 'workflow') return <div className="personalized-root suite-workflow">
     <SiteHeader profile={profile} active="workflow" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
