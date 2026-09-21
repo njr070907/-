@@ -31,6 +31,25 @@ function NoticeCard({ item, onOpen, index, animate }: { item: Recommendation; on
   </article>
 }
 
+function SiteHeader({ profile, active, onBrowse, onWorkflow, onProfile, onLogout }: {
+  profile: UserProfile
+  active: Screen
+  onBrowse: () => void
+  onWorkflow: () => void
+  onProfile: () => void
+  onLogout: () => void
+}) {
+  return <header className="site-header"><div className="header-inner">
+    <button className="brand" onClick={onBrowse} type="button"><span className="brand-mark small">清</span><span>校事清</span></button>
+    <nav aria-label="主导航">
+      <button aria-current={active === 'feed' ? 'page' : undefined} className={active === 'feed' ? 'nav-active' : ''} onClick={onBrowse} type="button">信息广场</button>
+      <button aria-current={active === 'workflow' ? 'page' : undefined} className={active === 'workflow' ? 'nav-active' : ''} onClick={onWorkflow} type="button">办事工作台</button>
+      <button onClick={onProfile} type="button">个人中心</button>
+    </nav>
+    <div className="header-user"><span className="avatar">{profile.displayName.slice(0, 1)}</span><span>{profile.displayName}</span><button className="logout" onClick={onLogout} type="button">退出</button></div>
+  </div></header>
+}
+
 export default function PersonalizedApp() {
   const [ready, setReady] = useState(false)
   const [session, setSession] = useState<Session | null>(null)
@@ -140,19 +159,17 @@ export default function PersonalizedApp() {
     setScreen('feed')
   }
 
-  if (screen === 'workflow') return <div className="suite-workflow">
-    <nav className="suite-switcher" aria-label="产品功能切换">
-      <button type="button" onClick={resetToBrowse}>信息广场</button>
-      <button type="button" className="is-active" aria-current="page">办事工作台</button>
-      <button type="button" onClick={() => setEditing(true)}>个人资料</button>
-      <span className="suite-user">{profile.displayName}</span>
-      <button type="button" className="suite-logout" onClick={logout}>退出</button>
-    </nav>
-    <WorkflowApp />
+  const openWorkflow = () => { setSelected(null); setScreen('workflow'); window.scrollTo({ top: 0, behavior: 'auto' }) }
+  const openProfile = () => { setSelected(null); setEditing(true); window.scrollTo({ top: 0, behavior: 'auto' }) }
+
+  if (screen === 'workflow') return <div className="personalized-root suite-workflow">
+    <SiteHeader profile={profile} active="workflow" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
+    <main className="workflow-dashboard"><WorkflowApp embedded /></main>
+    <footer>校事清 · 本地演示版本 · 演示通知并非校方真实公告</footer>
   </div>
 
   return <div className="personalized-root"><div className="app-shell">
-    <header className="site-header"><div className="header-inner"><button className="brand" onClick={resetToBrowse}><span className="brand-mark small">清</span><span>校事清</span></button><nav aria-label="主导航"><button className={!selected ? 'nav-active' : ''} onClick={resetToBrowse}>信息广场</button><button onClick={() => { setSelected(null); setScreen('workflow'); window.scrollTo({ top: 0, behavior: 'auto' }) }}>办事工作台</button><button onClick={() => { setSelected(null); setEditing(true); window.scrollTo({ top: 0, behavior: 'auto' }) }}>个人中心</button></nav><div className="header-user"><span className="avatar">{profile.displayName.slice(0, 1)}</span><span>{profile.displayName}</span><button className="logout" onClick={logout}>退出</button></div></div></header>
+    <SiteHeader profile={profile} active="feed" onBrowse={resetToBrowse} onWorkflow={openWorkflow} onProfile={openProfile} onLogout={logout} />
     <main className="dashboard">
       {selected ? <><button className="back-button" onClick={returnFromDetail}>← 返回信息列表</button><article className="detail-card"><span className="eyebrow">NOTICE DETAIL</span><h1>{selected.title || '未提供标题'}</h1><div className="detail-meta"><span>来源：{selected.source_name || '未提供'}</span><span>发布时间：{dateLabel(selected.published_at) || '未提供'}</span>{selected.deadline && <span>截止日期：{dateLabel(selected.deadline)}</span>}</div><pre>{selected.raw_text}</pre>{selected.source_url && <a href={selected.source_url} target="_blank" rel="noreferrer">查看原始来源 ↗</a>}</article></> : <>
         <section className="welcome"><div><span className="eyebrow">YOUR CAMPUS, IN FOCUS</span><h1>你好，{profile.displayName}<span className="wave"> ✦</span></h1><p>根据你的{roleLabels[profile.role]}身份、{profile.college}和关注方向，为你整理今天值得留意的校园信息。</p></div><div className="welcome-stat"><strong>{notices.length}</strong><span>条校园信息</span><small className={connected ? 'online' : 'offline'}>● {connected ? '数据已连接' : '数据暂未连接'}</small></div></section>

@@ -293,34 +293,120 @@ footer { text-align: center; padding: 18px 16px max(22px, env(safe-area-inset-bo
 
 }
 
-.suite-switcher {
-  position: sticky;
-  top: 0;
-  z-index: 30;
+/* The workflow keeps its feature structure, but shares the information plaza's visual system. */
+@scope (.personalized-root) {
+.workflow-dashboard { max-width: 1150px; min-height: calc(100vh - 140px); margin: auto; padding: 20px 16px 48px; }
+.workflow-shell.is-embedded {
+  display: block;
+  min-height: 0;
+  color: #17384a;
+  background: transparent;
+  --ink: #17384a;
+  --muted: #71848b;
+  --paper: #fff;
+  --canvas: #f6f9f8;
+  --line: #dce8e6;
+  --accent: #0a817b;
+  --accent-dark: #066b65;
+  --blue-soft: #eaf1f9;
+  --green: #178a74;
+  --green-soft: #e0f3ee;
+  --yellow-soft: #fff4da;
+  --danger-soft: #fff0ed;
+  --shadow: 0 8px 28px #1844520b;
+}
+.workflow-shell.is-embedded .side-rail {
+  position: static;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  border: 1px solid #e2ebea;
+  border-radius: 14px;
+  background: #fff;
+  padding: 6px;
+  color: #17384a;
+  box-shadow: 0 4px 18px #164e5407;
+}
+.workflow-shell.is-embedded .side-rail > .brand,
+.workflow-shell.is-embedded .rail-note { display: none; }
+.workflow-shell.is-embedded .nav-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+.workflow-shell.is-embedded .nav-item {
   display: flex;
+  min-width: 0;
+  min-height: 46px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 16px;
-  border-bottom: 1px solid #d7e3de;
-  background: rgba(255, 255, 255, .94);
-  backdrop-filter: blur(14px);
-}
-.suite-switcher button {
-  min-height: 40px;
-  padding: 8px 16px;
-  border: 1px solid #bdd4ca;
-  border-radius: 999px;
-  color: #17384a;
-  background: #fff;
-  font: inherit;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  padding: 9px 10px;
+  color: #6a8589;
   font-weight: 700;
-  cursor: pointer;
+  text-align: center;
 }
-.suite-switcher button.is-active { color: #fff; border-color: #247c63; background: #247c63; }
-.suite-switcher .suite-user { margin-left: auto; color: #5e7772; font-size: 14px; }
-.suite-switcher .suite-logout { color: #6f7c83; border-color: transparent; background: transparent; }
-@media (max-width: 600px) {
-  .suite-switcher { justify-content: flex-start; overflow-x: auto; }
-  .suite-switcher .suite-user { display: none; }
+.workflow-shell.is-embedded .nav-item:hover,
+.workflow-shell.is-embedded .nav-item.is-active { background: #eaf6f3; color: #087b73; }
+.workflow-shell.is-embedded .nav-item svg { width: 19px; height: 19px; color: currentColor; }
+.workflow-shell.is-embedded .workspace { width: 100%; max-width: none; margin: 0; padding: 26px 0 64px; }
+.workflow-shell.is-embedded .page-header { align-items: center; margin-bottom: 20px; }
+.workflow-shell.is-embedded .page-header h1 {
+  margin: 6px 0 0;
+  color: #17384a;
+  font-family: inherit;
+  font-size: clamp(1.55rem, 6vw, 2rem);
+  letter-spacing: -.035em;
+}
+.workflow-shell.is-embedded .eyebrow { color: #208f89; font-size: .7rem; letter-spacing: .15em; }
+.workflow-shell.is-embedded .connection { border-color: #dce8e6; background: #fff; color: #71848b; }
+.workflow-shell.is-embedded .connection.is-online i { background: #178a74; box-shadow: 0 0 0 4px #178a741f; }
+.workflow-shell.is-embedded .content-panel,
+.workflow-shell.is-embedded .matter-list,
+.workflow-shell.is-embedded .matter-detail,
+.workflow-shell.is-embedded .week-summary,
+.workflow-shell.is-embedded .search-box,
+.workflow-shell.is-embedded .empty-state {
+  border-color: #e2ebea;
+  background: #fff;
+  box-shadow: 0 8px 28px #1844520b;
+}
+.workflow-shell.is-embedded .content-panel { border-radius: 18px; }
+.workflow-shell.is-embedded .step-index { border-radius: 11px; background: #087f78; box-shadow: 0 8px 20px #087f7824; }
+.workflow-shell.is-embedded input,
+.workflow-shell.is-embedded textarea,
+.workflow-shell.is-embedded select { border-color: #d9e4e3; border-radius: 10px; background: #fbfdfc; color: #17384a; }
+.workflow-shell.is-embedded input:focus,
+.workflow-shell.is-embedded textarea:focus,
+.workflow-shell.is-embedded select:focus { border-color: #52ad9f; box-shadow: 0 0 0 3px #d8f1eb; }
+.workflow-shell.is-embedded .primary-button { border-radius: 11px; background: #0a817b; box-shadow: 0 7px 18px #0a817b24; }
+.workflow-shell.is-embedded .primary-button:hover { background: #066b65; }
+.workflow-shell.is-embedded .secondary-button { border-color: #bddbd4; border-radius: 11px; color: #087b73; }
+.workflow-shell.is-embedded .secondary-button:hover { background: #eef8f5; }
+.workflow-shell.is-embedded .text-button,
+.workflow-shell.is-embedded .source-link { color: #087d78; }
+.workflow-shell.is-embedded .matter-list,
+.workflow-shell.is-embedded .matter-detail,
+.workflow-shell.is-embedded .week-summary { border-radius: 14px; }
+.workflow-shell.is-embedded .matter-row.is-selected { color: #087b73; }
+.workflow-shell.is-embedded .compare-block,
+.workflow-shell.is-embedded .matter-choice { background: #eff7f4; }
+.workflow-shell.is-embedded .task-card { border-color: #e2ebea; border-radius: 13px; background: #fff; box-shadow: 0 4px 18px #164e5407; }
+.workflow-shell.is-embedded .search-box { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; }
+.workflow-shell.is-embedded .search-box button { background: #0a817b; }
+.workflow-shell.is-embedded .search-results > button { border-color: #e2ebea; border-radius: 13px; background: #fff; }
+.workflow-shell.is-embedded .bottom-nav { display: none; }
+.workflow-shell.is-embedded .notice-drawer { border: 1px solid #e2ebea; background: #fff; }
+
+@media (min-width: 700px) {
+  .workflow-dashboard { padding: 32px 24px 70px; }
+  .workflow-shell.is-embedded .nav-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .workflow-shell.is-embedded .workspace { padding-top: 34px; }
+}
+
+@media (max-width: 390px) {
+  .workflow-dashboard { padding-inline: 14px; }
+  .workflow-shell.is-embedded .nav-item { gap: 6px; padding-inline: 6px; font-size: .8rem; }
+  .workflow-shell.is-embedded .page-header { align-items: flex-start; }
+}
 }

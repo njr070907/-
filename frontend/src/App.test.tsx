@@ -40,6 +40,13 @@ describe('校事清主流程', () => {
     expect(screen.getAllByRole('button', { name: '搜索' }).length).toBeGreaterThan(0)
   })
 
+  it('在个性化套件中使用统一的工作台样式容器', async () => {
+    const { container } = render(<App embedded />)
+
+    expect(container.querySelector('.workflow-shell.is-embedded')).toBeInTheDocument()
+    expect((await screen.findAllByRole('button', { name: '添加通知' })).length).toBeGreaterThan(0)
+  })
+
   it('正文为空时不发送请求并显示错误', async () => {
     render(<App />)
 

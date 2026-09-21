@@ -109,7 +109,7 @@ function EmptyState({ title, detail }: { title: string; detail: string }) {
   )
 }
 
-function App() {
+function App({ embedded = false }: { embedded?: boolean }) {
   const [view, setView] = useState<View>('add')
   const [connected, setConnected] = useState<boolean | null>(null)
   const [globalError, setGlobalError] = useState('')
@@ -337,7 +337,7 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div className={embedded ? 'app-shell workflow-shell is-embedded' : 'app-shell'}>
       <aside className="side-rail" aria-label="主导航">
         <Brand connected={connected} />
         <nav className="nav-list">
