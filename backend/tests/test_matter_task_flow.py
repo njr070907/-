@@ -196,3 +196,60 @@ def test_extract_confirm_associate_and_complete_weekly_task(tmp_path: Path) -> N
     finally:
         app.dependency_overrides.clear()
         engine.dispose()
+
+
+def test_moving_a_notice_moves_its_task_and_drops_the_emptied_matter(tmp_path: Path) -> None:
+    engine = create_engine(
+        f"sqlite:///{tmp_path / 'test.db'}", connect_args={"check_same_thread": False}
+    )
+    Base.metadata.create_all(engine)
+    sessions = sessionmaker(bind=engine)
+
+    def override_db():
+        with sessions() as db:
+            yield db
+
+    app.dependency_overrides[get_db] = override_db
+    try:
+        with TestClient(app) as client:
+            notice_id = client.post(
+                "/api/notices", json={"raw_text": "奖学金通知\n办理阶段：学院初审"}
+            ).json()["id"]
+            fields = client.post(f"/api/notices/{notice_id}/extract").json()["extracted_json"]
+            first = client.post(
+                f"/api/notices/{notice_id}/confirm",
+                json={
+                    "extraction": fields,
+                    "new_matter_name": "旧事项",
+                    "task": {"stage": "学院初审", "deadline": "2026-09-21", "submit_channel": "", "materials": []},
+                },
+            )
+            old_matter_id = first.json()["matter_id"]
+            kept = client.post(
+                "/api/notices", json={"raw_text": "仍属于保留事项的通知"}
+            ).json()["id"]
+            keeper_id = client.post("/api/matters", json={"name": "保留事项"}).json()["id"]
+            client.post(f"/api/matters/{keeper_id}/notices/{kept}")
+
+            moved = client.post(f"/api/matters/{keeper_id}/notices/{notice_id}")
+            assert moved.status_code == 200
+            keeper = client.get(f"/api/matters/{keeper_id}").json()
+            assert {notice["id"] for notice in keeper["notices"]} == {notice_id, kept}
+            assert [task["source_notice_id"] for task in keeper["tasks"]] == [notice_id]
+            assert client.get(f"/api/matters/{old_matter_id}").status_code == 404
+
+            # Re-confirming without a task keeps the existing task with the notice,
+            # and the matter that still has another notice is not deleted.
+            reconfirmed = client.post(
+                f"/api/notices/{notice_id}/confirm",
+                json={"extraction": fields, "new_matter_name": "新事项"},
+            )
+            assert reconfirmed.status_code == 200
+            new_matter = client.get(f"/api/matters/{reconfirmed.json()['matter_id']}").json()
+            assert [task["source_notice_id"] for task in new_matter["tasks"]] == [notice_id]
+            keeper = client.get(f"/api/matters/{keeper_id}").json()
+            assert [notice["id"] for notice in keeper["notices"]] == [kept]
+            assert keeper["tasks"] == []
+    finally:
+        app.dependency_overrides.clear()
+        engine.dispose()

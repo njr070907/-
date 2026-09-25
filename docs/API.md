@@ -84,7 +84,7 @@ Content-Type: application/json
 
 ### POST /api/notices/{notice_id}/confirm
 
-用户编辑提取结果后确认。请求必须在 matter_id（关联已有事项）和 new_matter_name（新建事项）中二选一；可选传入 task 创建或更新该通知对应的办理环节。
+用户编辑提取结果后确认。请求必须在 matter_id（关联已有事项）和 new_matter_name（新建事项）中二选一；可选传入 task 创建或更新该通知对应的办理环节。重新确认到其他事项时，该通知已有的办理环节会随通知一起移动（即使这次没有传 task）；原事项因此不再有任何通知和办理环节时会被删除。
 
     {
       "extraction": {
@@ -113,7 +113,7 @@ Content-Type: application/json
 
 ### POST /api/matters/{matter_id}/notices/{notice_id}
 
-将一条通知手动关联到已有事项，不会创建待办。
+将一条通知手动关联到已有事项，不会创建待办。该通知已有的待办会随通知一起移到新事项；原事项因此不再有任何通知和待办时会被删除。
 
 ### GET /api/matters/{matter_id}/compare
 

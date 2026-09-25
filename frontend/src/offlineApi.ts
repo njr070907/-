@@ -150,11 +150,18 @@ export async function offlineRequest<T>(path: string, init?: RequestInit): Promi
       id: identifier('matter'), name: payload.new_matter_name || payload.extraction.matter_name, created_at: new Date().toISOString(),
     }
     if (!payload.matter_id) state.matters.push(matter)
+    const previousMatterId = notice.matter_id
     notice.matter_id = matter.id; notice.extracted_json = payload.extraction; notice.parse_status = 'confirmed'
+    const existing = state.tasks.find(item => item.source_notice_id === notice.id)
+    if (existing) existing.matter_id = matter.id
     if (payload.task) {
-      const existing = state.tasks.find(item => item.source_notice_id === notice.id)
-      if (existing) Object.assign(existing, payload.task, { matter_id: matter.id, confirmed: true })
+      if (existing) Object.assign(existing, payload.task, { confirmed: true })
       else state.tasks.push({ id: identifier('task'), matter_id: matter.id, source_notice_id: notice.id, confirmed: true, completed: false, created_at: new Date().toISOString(), ...payload.task })
+    }
+    // Same as the API: a matter left without notices or tasks is removed.
+    if (previousMatterId && previousMatterId !== matter.id &&
+      !state.notices.some(item => item.matter_id === previousMatterId) && !state.tasks.some(item => item.matter_id === previousMatterId)) {
+      state.matters = state.matters.filter(item => item.id !== previousMatterId)
     }
     saveState(state); return notice as T
   }
