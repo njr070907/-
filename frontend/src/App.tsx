@@ -551,7 +551,7 @@ function ReviewForm(props: ReviewProps) {
           <ReviewField label="事项名称" evidence={extraction.evidence} field="matter_name"><input value={extraction.matter_name} onChange={(event) => props.onExtractionChange('matter_name', event.target.value)} /></ReviewField>
           <ReviewField label="适用对象" evidence={extraction.evidence} field="audience"><input value={extraction.audience.join('、')} onChange={(event) => props.onExtractionChange('audience', splitList(event.target.value))} placeholder="多个对象用顿号分隔" /></ReviewField>
           <ReviewField label="办理阶段" evidence={extraction.evidence} field="stage"><input value={extraction.stage} onChange={(event) => props.onExtractionChange('stage', event.target.value)} placeholder="例如：学院初审" /></ReviewField>
-          <ReviewField label="截止时间" evidence={extraction.evidence} field="deadline"><input type="datetime-local" value={extraction.deadline ?? ''} onChange={(event) => props.onExtractionChange('deadline', event.target.value || null)} />{!extraction.deadline && <p className="inline-warning">原文日期不完整，请确认；不会自动填当前年份。</p>}</ReviewField>
+          <ReviewField label="截止时间" evidence={extraction.evidence} field="deadline"><DeadlineInput value={extraction.deadline} onChange={(value) => props.onExtractionChange('deadline', value)} /></ReviewField>
           <ReviewField label="提交入口" evidence={extraction.evidence} field="submit_channel"><input value={extraction.submit_channel} onChange={(event) => props.onExtractionChange('submit_channel', event.target.value)} /></ReviewField>
           <ReviewField label="材料要求" evidence={extraction.evidence} field="materials"><input value={extraction.materials.join('、')} onChange={(event) => props.onExtractionChange('materials', splitList(event.target.value))} placeholder="多个材料用顿号分隔" /></ReviewField>
           <ReviewField label="明确变更" evidence={extraction.evidence} field="explicit_change" full><textarea rows={3} value={extraction.explicit_change} onChange={(event) => props.onExtractionChange('explicit_change', event.target.value)} /></ReviewField>
@@ -575,6 +575,22 @@ function ReviewForm(props: ReviewProps) {
         <div className="form-actions"><button className="secondary-button" onClick={props.onBack} type="button">返回修改原文</button><button className="primary-button" disabled={props.saving} type="submit">{props.saving ? '正在确认…' : '确认并保存'}<span>✓</span></button></div>
       </form>
     </section>
+  )
+}
+
+// Separate date and time inputs: a datetime-local input shows a date-only value
+// such as "2026-09-23" as empty, hiding a deadline that will still be saved.
+function DeadlineInput({ value, onChange }: { value: string | null; onChange: (value: string | null) => void }) {
+  const [datePart = '', timePart = ''] = (value ?? '').split('T')
+  return (
+    <>
+      <span className="deadline-inputs">
+        <input aria-label="截止日期" type="date" value={datePart} onChange={(event) => onChange(event.target.value ? `${event.target.value}${timePart ? `T${timePart}` : ''}` : null)} />
+        <input aria-label="截止时刻" type="time" value={timePart} disabled={!datePart} onChange={(event) => onChange(`${datePart}${event.target.value ? `T${event.target.value}` : ''}`)} />
+      </span>
+      {!datePart && <p className="inline-warning">原文日期不完整，请确认；不会自动填当前年份。</p>}
+      {datePart && !timePart && <p className="inline-hint">原文没有写具体时刻，可按需补充；留空则只记录日期。</p>}
+    </>
   )
 }
 
