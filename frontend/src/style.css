@@ -89,6 +89,9 @@ input:focus, textarea:focus, select:focus { border-color: #5d8193; box-shadow: 0
 .evidence summary { width: max-content; color: #52758a; cursor: pointer; font-weight: 700; }
 .evidence blockquote { margin: 7px 0 0; border-left: 2px solid #9ab7c3; padding: 4px 0 4px 9px; color: #5c6b72; line-height: 1.6; }
 .inline-warning { margin: 7px 0 0; border-radius: 9px; background: var(--yellow-soft); padding: 8px 10px; color: #76560f; font-size: 11px; font-weight: 650; line-height: 1.55; }
+.inline-hint { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.deadline-inputs { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 8px; }
+.deadline-inputs input:disabled { opacity: .55; cursor: not-allowed; }
 .raw-reference { margin: 22px 0; border-block: 1px solid var(--line); padding: 15px 0; }
 .raw-reference summary { cursor: pointer; color: #43657a; font-size: 13px; font-weight: 800; }
 .raw-reference pre, .raw-copy { overflow-wrap: anywhere; white-space: pre-wrap; font: inherit; font-size: 13px; line-height: 1.8; }

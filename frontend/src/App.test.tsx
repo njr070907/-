@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
 const api = vi.hoisted(() => ({
+  confirmNotice: vi.fn(),
   createNotice: vi.fn(),
   extractNotice: vi.fn(),
   getHealth: vi.fn(),
@@ -18,7 +19,6 @@ const api = vi.hoisted(() => ({
 vi.mock('./api', () => ({
   ...api,
   compareMatterNotices: vi.fn(),
-  confirmNotice: vi.fn(),
   updateTask: vi.fn(),
 }))
 
@@ -111,8 +111,58 @@ describe('校事清主流程', () => {
 
     await waitFor(() => expect(api.extractNotice).toHaveBeenCalledWith('notice_1'))
     expect(await screen.findByRole('heading', { name: '核对提取结果' })).toBeInTheDocument()
-    expect(screen.getByDisplayValue('2026-09-21T18:30')).toBeInTheDocument()
+    expect(screen.getByLabelText('截止日期')).toHaveValue('2026-09-21')
+    expect(screen.getByLabelText('截止时刻')).toHaveValue('18:30')
     expect(screen.getByText('2026年9月21日18:30')).toBeInTheDocument()
+  })
+
+  it('只有日期的截止时间可见，并可补充时刻后确认', async () => {
+    const notice = {
+      id: 'notice_1',
+      title: '讲座通知',
+      source_name: null,
+      source_url: null,
+      published_at: null,
+      source_type: 'manual_copy',
+      parse_status: 'review_required' as const,
+      matter_id: null,
+      raw_text: '截止时间：2026年9月23日（周三）',
+      collected_by: null,
+      collected_at: null,
+      imported_at: '2026-09-19T00:00:00Z',
+      created_at: '2026-09-19T00:00:00Z',
+      extracted_json: {
+        matter_name: '讲座通知',
+        audience: [],
+        stage: '报名',
+        deadline: '2026-09-23',
+        submit_channel: '',
+        materials: [],
+        explicit_change: '',
+        confidence: 0.43,
+        evidence: [],
+      },
+    }
+    api.createNotice.mockResolvedValue(notice)
+    api.extractNotice.mockResolvedValue(notice)
+    api.confirmNotice.mockResolvedValue({ ...notice, parse_status: 'confirmed' })
+
+    render(<App />)
+    fireEvent.change(screen.getByLabelText(/原文正文/), { target: { value: notice.raw_text } })
+    fireEvent.click(screen.getByRole('button', { name: /保存并提取/ }))
+
+    expect(await screen.findByLabelText('截止日期')).toHaveValue('2026-09-23')
+    expect(screen.getByLabelText('截止时刻')).toHaveValue('')
+    expect(screen.queryByText(/原文日期不完整/)).not.toBeInTheDocument()
+    expect(screen.getByText(/原文没有写具体时刻/)).toBeInTheDocument()
+
+    fireEvent.change(screen.getByLabelText('截止时刻'), { target: { value: '17:00' } })
+    fireEvent.click(screen.getByRole('button', { name: /确认并保存/ }))
+
+    await waitFor(() => expect(api.confirmNotice).toHaveBeenCalledWith('notice_1', expect.objectContaining({
+      extraction: expect.objectContaining({ deadline: '2026-09-23T17:00' }),
+      task: expect.objectContaining({ deadline: '2026-09-23T17:00' }),
+    })))
   })
 
   it('返回修改原文后更新原草稿而不是新增重复通知', async () => {
