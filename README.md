@@ -25,7 +25,7 @@ git pull --ff-only origin main
 Copy-Item .env.example .env
 Copy-Item frontend/.env.example frontend/.env
 py -3 -m venv backend/.venv
-.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.txt
+.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements-dev.txt
 .\backend\.venv\Scripts\python.exe -m backend.scripts.import_seed_data
 .\backend\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --reload --port 8000
 ```
@@ -60,6 +60,8 @@ cd frontend
 npm run build
 npm test
 ```
+
+`backend/requirements-dev.txt` 在运行依赖 `backend/requirements.txt` 之外加上 pytest 等测试工具；只做现场演示时安装后者即可。推送到 `main` 或提交 Pull Request 时，GitHub Actions 会自动运行上面的后端测试、前端构建与测试，以及离线版构建（见 `.github/workflows/ci.yml`）。
 
 具体请求与错误格式见 [docs/API.md](docs/API.md)。架构边界及未来迁移说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。SQLite 启动时会对已知旧结构执行受限升级，统一补充事项、提取结果与个性化通知元数据，并在修改前备份数据库；更复杂的正式演进仍应引入迁移工具。
 
