@@ -61,7 +61,7 @@ Content-Type: application/json
 }
 ```
 
-缺少或留空 `raw_text` 返回 `422` 和 FastAPI 验证错误；非法时间同样返回 `422`。
+缺少或留空 `raw_text` 返回 `422` 和 FastAPI 验证错误；非法时间同样返回 `422`。`source_url` 只接受 `http://` 或 `https://` 开头的地址（页面会把它渲染成链接），留空视为 `null`，其他值返回 `422`；PATCH 同样适用。
 
 ## PATCH /api/notices/{id}
 
