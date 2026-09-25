@@ -50,6 +50,17 @@ test('required applicable notice wins while expired highly matched notice falls 
   assert(ranked[0].reasons.includes('必须办理'))
 })
 
+test('a deadline that passed earlier today is expired, one later today is due today', () => {
+  const passed = calculateRelevance(profile, notice('passed', { required: true, deadline: '2026-09-20T06:00:00Z' }), now)
+  assert.equal(passed.expired, true)
+  assert.equal(passed.requiredForUser, false)
+  assert(!passed.reasons.includes('今天截止'))
+  assert(!passed.reasons.includes('必须办理'))
+  const later = calculateRelevance(profile, notice('later', { deadline: '2026-09-20T09:00:00Z' }), now)
+  assert.equal(later.expired, false)
+  assert(later.reasons.includes('今天截止'))
+})
+
 test('upcoming orders by deadline and excludes expired notices', () => {
   const items = rankNotices(profile, [notice('late', { deadline: '2026-09-29T08:00:00Z' }), notice('soon', { deadline: '2026-09-21T08:00:00Z' }), notice('old', { deadline: '2026-09-19T08:00:00Z' })], now)
   assert.deepEqual(upcomingNotices(items, now).map(item => item.notice.id), ['soon', 'late'])

@@ -15,6 +15,9 @@ export type Recommendation = {
 const day = 86_400_000
 const matches = (scope: string[] | null | undefined, value: string) => !scope?.length || scope.includes(value)
 const timestamp = (value: string | null | undefined) => value ? Date.parse(value) : NaN
+const startOfDay = (value: Date) => new Date(value.getFullYear(), value.getMonth(), value.getDate()).getTime()
+// Calendar days, so a deadline later today is "今天截止" rather than "1天后截止".
+const calendarDaysUntil = (deadline: number, now: Date) => Math.round((startOfDay(new Date(deadline)) - startOfDay(now)) / day)
 
 export function calculateRelevance(profile: UserProfile, notice: NoticeSummary, now = new Date()): Recommendation {
   const roleMatch = matches(notice.audience_roles, profile.role)
@@ -23,8 +26,8 @@ export function calculateRelevance(profile: UserProfile, notice: NoticeSummary, 
   const gradeMatch = matches(notice.grades, profile.grade)
   const applies = roleMatch && collegeMatch && majorMatch && gradeMatch
   const deadlineTime = timestamp(notice.deadline)
-  const daysLeft = Number.isNaN(deadlineTime) ? null : Math.ceil((deadlineTime - now.getTime()) / day)
-  const expired = daysLeft !== null && daysLeft < 0
+  const expired = !Number.isNaN(deadlineTime) && deadlineTime < now.getTime()
+  const daysLeft = Number.isNaN(deadlineTime) || expired ? null : calendarDaysUntil(deadlineTime, now)
   const reasons: string[] = []
   let score = 40 // Public notices are useful even without audience metadata.
 
