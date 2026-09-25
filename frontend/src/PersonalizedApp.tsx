@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import WorkflowApp from './App'
-import { getHealth, getNotice, getNotices, type NoticeDetail, type NoticeSummary } from './api'
+import { getHealth, getNotice, getNotices, isDraftNotice, type NoticeDetail, type NoticeSummary } from './api'
 import { authService } from './auth'
 import { AuthScreen } from './AuthScreen'
 import { ensureDemoUsers } from './demo'
@@ -93,7 +93,7 @@ export default function PersonalizedApp() {
     let active = true
     const timer = window.setTimeout(() => {
       setLoadingNotices(true)
-      void getNotices(query.trim()).then(items => { if (active) { setNotices(items); setError('') } }).catch((cause: unknown) => {
+      void getNotices(query.trim()).then(items => { if (active) { setNotices(items.filter(item => !isDraftNotice(item))); setError('') } }).catch((cause: unknown) => {
         if (active) setError(cause instanceof Error ? cause.message : '无法读取通知')
       }).finally(() => { if (active) setLoadingNotices(false) })
     }, query ? 250 : 0)
