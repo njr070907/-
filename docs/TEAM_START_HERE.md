@@ -35,7 +35,7 @@ git switch -c feature/your-task
 
 ## 4. 启动项目
 
-准确命令和环境要求见 [README 的“从全新 clone 启动”](../README.md#从全新-clone-启动)。顺序是：创建 Python 虚拟环境 → 安装 `backend/requirements.txt` → 导入 Seed Data → 启动 FastAPI；另开终端在 `frontend/` 运行 `npm ci` 和 `npm run dev`。
+准确命令和环境要求见 [README 的“从全新 clone 启动”](../README.md#从全新-clone-启动)。顺序是：创建 Python 虚拟环境 → 安装 `backend/requirements-dev.txt`（包含运行依赖和测试工具）→ 导入 Seed Data → 启动 FastAPI；另开终端在 `frontend/` 运行 `npm ci` 和 `npm run dev`。
 
 - 页面：`http://localhost:5173`
 - 后端：`http://localhost:8000`
