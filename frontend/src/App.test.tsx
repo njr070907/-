@@ -87,6 +87,17 @@ describe('校事清主流程', () => {
     expect(screen.getByRole('button', { name: /保存并提取/ })).toBeEnabled()
   })
 
+  it('来源链接不是 http(s) 时提示并且不保存', async () => {
+    render(<App />)
+
+    fireEvent.change(await screen.findByLabelText(/原文正文/), { target: { value: '通知正文' } })
+    fireEvent.change(screen.getByLabelText(/来源链接/), { target: { value: 'javascript:alert(1)' } })
+    fireEvent.click(screen.getByRole('button', { name: /保存并提取/ }))
+
+    expect(await screen.findByText('来源链接需要以 http:// 或 https:// 开头')).toBeInTheDocument()
+    expect(api.createNotice).not.toHaveBeenCalled()
+  })
+
   it('保存通知后进入可编辑的人工确认页', async () => {
     api.createNotice.mockResolvedValue({
       id: 'notice_1',

@@ -7,6 +7,16 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from backend.app.services.notice_processing import NoticeExtraction, VersionComparison
 
 
+def _http_url_or_none(value: str | None) -> str | None:
+    """Pages render source_url as a link, so only http(s) addresses are accepted."""
+    if value is None or not value.strip():
+        return None
+    value = value.strip()
+    if not re.match(r"https?://\S+$", value, re.IGNORECASE):
+        raise ValueError("source_url must start with http:// or https://")
+    return value
+
+
 class NoticeFields(BaseModel):
     title: str | None = None
     raw_text: str = Field(min_length=1)
@@ -31,6 +41,11 @@ class NoticeFields(BaseModel):
             raise ValueError("raw_text cannot be blank")
         return value
 
+    @field_validator("source_url")
+    @classmethod
+    def require_http_source_url(cls, value: str | None) -> str | None:
+        return _http_url_or_none(value)
+
 
 class SeedNotice(NoticeFields):
     id: str = Field(min_length=1, max_length=120)
@@ -52,6 +67,11 @@ class NoticeUpdate(BaseModel):
         if not value.strip():
             raise ValueError("raw_text cannot be blank")
         return value
+
+    @field_validator("source_url")
+    @classmethod
+    def require_http_source_url(cls, value: str | None) -> str | None:
+        return _http_url_or_none(value)
 
 
 class NoticeSummary(BaseModel):

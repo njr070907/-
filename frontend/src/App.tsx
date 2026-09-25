@@ -24,6 +24,7 @@ import {
   type Task,
   type VersionComparison,
 } from './api'
+import { isHttpUrl } from './sourceUrl'
 
 type View = 'add' | 'matters' | 'week' | 'search'
 type MatterMode = 'new' | 'existing'
@@ -193,6 +194,10 @@ function App({ embedded = false }: { embedded?: boolean }) {
     setToast('')
     if (!rawText.trim()) {
       setFormError('请粘贴通知原文')
+      return
+    }
+    if (sourceUrl.trim() && !isHttpUrl(sourceUrl)) {
+      setFormError('来源链接需要以 http:// 或 https:// 开头')
       return
     }
     setSaving(true)
@@ -503,7 +508,7 @@ function App({ embedded = false }: { embedded?: boolean }) {
             <h2 id="notice-title">{noticeTitle(openNotice)}</h2>
             <div className="source-row"><span>{openNotice.source_name || '未提供来源'}</span><StatusPill status={openNotice.parse_status} /></div>
             <pre className="raw-copy">{openNotice.raw_text}</pre>
-            {openNotice.source_url && <a className="source-link" href={openNotice.source_url} rel="noreferrer" target="_blank">打开来源链接 ↗</a>}
+            {isHttpUrl(openNotice.source_url) && <a className="source-link" href={openNotice.source_url} rel="noreferrer" target="_blank">打开来源链接 ↗</a>}
           </section>
         </div>
       )}

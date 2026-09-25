@@ -10,6 +10,7 @@ import { SlidingIndicator } from './SlidingIndicator'
 import { profileRepository } from './profiles'
 import { calculateRelevance, rankNotices, upcomingNotices, type Recommendation } from './recommendation'
 import { isProfileComplete, roleLabels, type Session, type UserProfile } from './user'
+import { isHttpUrl } from './sourceUrl'
 
 type Tab = 'recommended' | 'all' | 'upcoming'
 type Screen = 'feed' | 'workflow'
@@ -174,7 +175,7 @@ export default function PersonalizedApp() {
     {editing ? <div className="page-surface" key="profile">
       <ProfileForm session={session} initial={profile} inApp onSave={value => { setProfile(value); resetToBrowse() }} onCancel={resetToBrowse} />
     </div> : screen === 'workflow' ? <main className="workflow-dashboard page-surface" key="workflow"><WorkflowApp embedded /></main> : <main className="dashboard page-surface" key="feed">
-      {selected ? <><button className="back-button" onClick={returnFromDetail}>← 返回信息列表</button><article className="detail-card"><span className="eyebrow">NOTICE DETAIL</span><h1>{selected.title || '未提供标题'}</h1><div className="detail-meta"><span>来源：{selected.source_name || '未提供'}</span><span>发布时间：{dateLabel(selected.published_at) || '未提供'}</span>{selected.deadline && <span>截止日期：{dateLabel(selected.deadline)}</span>}</div><pre>{selected.raw_text}</pre>{selected.source_url && <a href={selected.source_url} target="_blank" rel="noreferrer">查看原始来源 ↗</a>}</article></> : <>
+      {selected ? <><button className="back-button" onClick={returnFromDetail}>← 返回信息列表</button><article className="detail-card"><span className="eyebrow">NOTICE DETAIL</span><h1>{selected.title || '未提供标题'}</h1><div className="detail-meta"><span>来源：{selected.source_name || '未提供'}</span><span>发布时间：{dateLabel(selected.published_at) || '未提供'}</span>{selected.deadline && <span>截止日期：{dateLabel(selected.deadline)}</span>}</div><pre>{selected.raw_text}</pre>{isHttpUrl(selected.source_url) && <a href={selected.source_url} target="_blank" rel="noreferrer">查看原始来源 ↗</a>}</article></> : <>
         <section className="welcome"><div><span className="eyebrow">YOUR CAMPUS, IN FOCUS</span><h1>你好，{profile.displayName}<span className="wave"> ✦</span></h1><p>根据你的{roleLabels[profile.role]}身份、{profile.college}和关注方向，为你整理今天值得留意的校园信息。</p></div><div className="welcome-stat"><strong>{notices.length}</strong><span>条校园信息</span><small className={connected ? 'online' : 'offline'}>● {connected ? '数据已连接' : '数据暂未连接'}</small></div></section>
         <section className="browse-heading"><div><span className="eyebrow">CAMPUS UPDATES</span><h2>信息浏览</h2></div><button className="profile-link" onClick={() => setEditing(true)}>调整我的关注 →</button></section>
         <div className="toolbar"><div className="tabs" role="tablist" aria-label="信息视图" style={{ '--tab-index': (Object.keys(tabLabels) as Tab[]).indexOf(tab) } as CSSProperties}>{(Object.keys(tabLabels) as Tab[]).map(value => <button role="tab" aria-selected={tab === value} className={tab === value ? 'active' : ''} key={value} onClick={() => switchTab(value)}>{tabLabels[value]}</button>)}</div><label className="search-box"><span aria-hidden="true">⌕</span><input type="search" value={query} onChange={event => { setAnimateCards(false); setQuery(event.target.value) }} placeholder="搜索标题或通知内容" aria-label="搜索通知" /></label></div>

@@ -117,6 +117,15 @@ export type NoticeConfirmInput = {
 const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').replace(/\/$/, '')
 const offlineMode = import.meta.env.VITE_OFFLINE_MODE === 'true' || window.location.protocol === 'file:'
 
+// FastAPI returns a string for HTTPException but a list of {msg} for 422
+// validation errors, which would otherwise be shown as "[object Object]".
+function errorDetail(detail: unknown): string {
+  if (typeof detail === 'string') return detail
+  if (!Array.isArray(detail)) return ''
+  const messages = detail.map(item => (item as { msg?: unknown } | null)?.msg).filter((msg): msg is string => typeof msg === 'string')
+  return messages.length ? `提交内容格式不正确：${messages.join('；')}` : ''
+}
+
 async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
   if (offlineMode) return offlineRequest<T>(path, init)
   const response = await fetch(`${apiBaseUrl}${path}`, {
@@ -127,8 +136,8 @@ async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
     },
   })
   if (!response.ok) {
-    const payload = await response.json().catch(() => null) as { detail?: string } | null
-    throw new Error(payload?.detail || `请求失败（${response.status}）`)
+    const payload = await response.json().catch(() => null) as { detail?: unknown } | null
+    throw new Error(errorDetail(payload?.detail) || `请求失败（${response.status}）`)
   }
   if (response.status === 204) return undefined as T
   return response.json() as Promise<T>

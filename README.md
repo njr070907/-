@@ -48,7 +48,7 @@ Windows 优先使用 `py -3` 调用 Python；macOS/Linux 使用 `python3 -m venv
 
 ## 数据与测试
 
-SQLite 文件默认是 `backend/app.db`，由导入脚本或后端启动自动建表；它已被 Git 忽略。`DATABASE_URL` 在根目录 `.env` 中配置，默认示例为 `sqlite:///./backend/app.db`，以上命令均从仓库根目录运行。前端地址在 `frontend/.env` 的 `VITE_API_BASE_URL` 配置；改动后重启 Vite。两个 `.env` 均不提交。
+SQLite 文件默认是 `backend/app.db`，由导入脚本或后端启动自动建表；它已被 Git 忽略。`DATABASE_URL` 在根目录 `.env` 中配置，默认示例为 `sqlite:///./backend/app.db`；SQLite 相对路径一律按仓库根目录解析，与启动命令所在目录无关。以上命令仍建议从仓库根目录运行。前端地址在 `frontend/.env` 的 `VITE_API_BASE_URL` 配置；改动后重启 Vite。两个 `.env` 均不提交。
 
 新增通知：按 [data/README.md](data/README.md) 复制模板到 `data/raw/`，填写唯一 `id` 和完整 `raw_text`，未知信息填 `null`。再次执行导入命令即可；已有 `id` 会安全跳过。导入命令同时加载 `data/demo_notices.json` 中的 15 条演示通知，已有演示通知同样跳过。当前 Seed 和 POST 创建的通知均标为 `source_type=manual_copy`、`parse_status=raw`。
 
