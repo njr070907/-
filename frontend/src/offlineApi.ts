@@ -9,6 +9,7 @@ import type {
   Task,
   VersionComparison,
 } from './api'
+import { extractDeadline } from './deadlineExtraction'
 import { createOfflineSeedNotices } from './offlineSeeds'
 
 type OfflineState = { notices: NoticeDetail[]; matters: MatterSummary[]; tasks: Task[] }
@@ -72,13 +73,8 @@ function extractFields(rawText: string): NoticeExtraction {
   const stage = pick('stage', /(?:办理环节|办理阶段|阶段)\s*[：:]\s*([^\n。；;]+)/)
   const materialsText = pick('materials', /(?:材料|提交材料)(?:包括|为)?\s*[：:]\s*([^\n。；;]+)/)
   const splitList = (value: string) => value.split(/[、，,；;]/).map(item => item.trim()).filter(Boolean)
-  let deadline: string | null = null
-  const date = rawText.match(/(\d{4})年(\d{1,2})月(\d{1,2})日(?:\s*(?:上午|下午)?\s*(\d{1,2})(?:(?::|：|时)(\d{1,2}))?)?/)
-  if (date) {
-    evidence.push({ field: 'deadline', text: date[0] })
-    const day = `${date[1]}-${date[2].padStart(2, '0')}-${date[3].padStart(2, '0')}`
-    deadline = date[4] ? `${day}T${date[4].padStart(2, '0')}:${(date[5] || '0').padStart(2, '0')}` : day
-  }
+  const { deadline, evidence: deadlineEvidence } = extractDeadline(rawText)
+  if (deadlineEvidence) evidence.push({ field: 'deadline', text: deadlineEvidence })
   let submitChannel = ''
   const channel = rawText.match(/(?:提交|报送)(?:至|到|方式[：:]?)\s*([^\n。；;]+)/)
   if (channel?.[1]) { submitChannel = channel[1].trim(); evidence.push({ field: 'submit_channel', text: channel[0].trim() }) }

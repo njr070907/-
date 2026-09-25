@@ -1,9 +1,18 @@
+import json
+
 import pytest
 
+from backend.app.config import PROJECT_ROOT
 from backend.app.services.notice_processing import (
     NoticeExtraction,
     compare_notice_versions,
     extract_notice_fields,
+)
+
+# Shared with frontend/src/deadlineExtraction.test.ts so the offline build
+# extracts the same deadlines as the API.
+DEADLINE_CASES = json.loads(
+    (PROJECT_ROOT / "data" / "expected" / "deadline_cases.json").read_text(encoding="utf-8")
 )
 
 
@@ -47,6 +56,15 @@ def test_keeps_yearless_date_unconfirmed_and_does_not_invent_fields() -> None:
     assert result.materials == []
     assert result.evidence[-1].field == "deadline"
     assert result.evidence[-1].text == "9月21日18:30"
+
+
+@pytest.mark.parametrize("case", DEADLINE_CASES, ids=[case["name"] for case in DEADLINE_CASES])
+def test_deadline_formats_found_in_real_notices(case: dict) -> None:
+    result = extract_notice_fields(case["text"])
+
+    assert result.deadline == case["deadline"]
+    deadline_evidence = [item.text for item in result.evidence if item.field == "deadline"]
+    assert deadline_evidence == ([case["evidence"]] if case["evidence"] else [])
 
 
 def test_rejects_blank_notice() -> None:

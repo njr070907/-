@@ -9,4 +9,6 @@
 - 班级材料事项：`demo_class_material_collection`
 - 日期不完整场景：`demo_incomplete_deadline`
 
+`deadline_cases.json` 是截止时间提取的格式用例（下午、星期、日期区间、发布日期等），由后端和前端离线版的测试共同读取。
+
 所有文本均为团队编写的脱敏演示数据，不代表真实校方公告。确认页面允许用户修改提取结果后，再手动关联到对应事项。
