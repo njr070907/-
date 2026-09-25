@@ -130,6 +130,7 @@ async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
     const payload = await response.json().catch(() => null) as { detail?: string } | null
     throw new Error(payload?.detail || `请求失败（${response.status}）`)
   }
+  if (response.status === 204) return undefined as T
   return response.json() as Promise<T>
 }
 
@@ -153,6 +154,12 @@ export const updateNotice = (id: string, payload: NoticeCreateInput) =>
     method: 'PATCH',
     body: JSON.stringify(payload),
   })
+
+export const deleteDraftNotice = (id: string) =>
+  requestJson<void>(`/api/notices/${encodeURIComponent(id)}`, { method: 'DELETE' })
+
+// Drafts are notices extracted but not yet confirmed; they stay out of the feed.
+export const isDraftNotice = (notice: Pick<NoticeSummary, 'parse_status'>) => notice.parse_status === 'review_required'
 
 export const extractNotice = (id: string) =>
   requestJson<NoticeDetail>(`/api/notices/${encodeURIComponent(id)}/extract`, {

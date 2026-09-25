@@ -60,6 +60,7 @@ input:focus, textarea:focus, select:focus { border-color: #5d8193; box-shadow: 0
 .field-error { margin: 16px 0 0; border-radius: 12px; background: var(--danger-soft); padding: 11px 13px; color: #9d3526; font-size: 13px; font-weight: 700; }
 .form-actions { display: flex; flex-direction: column; align-items: stretch; gap: 14px; margin-top: 22px; }
 .form-actions > p { margin: 0; color: var(--muted); font-size: 12px; }
+.form-actions > .text-button { margin-right: auto; }
 .primary-button, .secondary-button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: 18px; border-radius: 13px; padding: 0 18px; font-weight: 800; }
 .primary-button { border: 0; background: var(--accent); color: #fff; box-shadow: 0 9px 20px rgba(215,101,63,.22); }
 .primary-button:hover { background: var(--accent-dark); }

@@ -76,6 +76,12 @@ Content-Type: application/json
 
 已确认通知不可修改，返回 `409`；未知 ID 返回 `404`。
 
+## DELETE /api/notices/{id}
+
+放弃一条草稿，供工作台确认页的“放弃草稿”使用。只允许删除 `parse_status=review_required` 且尚未关联事项的通知，成功返回 `204`；Seed 导入的 `raw` 通知、已确认或已关联事项的通知返回 `409`；未知 ID 返回 `404`。
+
+信息广场不展示 `review_required` 草稿；工作台的搜索仍会显示它们，并标为“待核对”。
+
 ## 事项、确认与待办
 
 ### POST /api/notices/{notice_id}/extract

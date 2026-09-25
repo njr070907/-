@@ -163,6 +163,12 @@ export async function offlineRequest<T>(path: string, init?: RequestInit): Promi
   }
   const noticeMatch = route.match(/^\/api\/notices\/([^/]+)$/)
   if (noticeMatch && method === 'GET') return noticeOrThrow(state, decodeURIComponent(noticeMatch[1])) as T
+  if (noticeMatch && method === 'DELETE') {
+    const notice = noticeOrThrow(state, decodeURIComponent(noticeMatch[1]))
+    if (notice.parse_status !== 'review_required' || notice.matter_id) throw new Error('只能放弃尚未确认的草稿')
+    state.notices = state.notices.filter(item => item.id !== notice.id)
+    saveState(state); return undefined as T
+  }
   if (noticeMatch && method === 'PATCH') {
     const notice = noticeOrThrow(state, decodeURIComponent(noticeMatch[1]))
     if (notice.parse_status === 'confirmed') throw new Error('已确认的通知不能直接修改')

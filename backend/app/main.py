@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from datetime import date, timedelta
 from uuid import uuid4
 
-from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi import Depends, FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
@@ -40,7 +40,7 @@ app = FastAPI(title="校事清 MVP API", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
-    allow_methods=["GET", "POST", "PATCH"],
+    allow_methods=["GET", "POST", "PATCH", "DELETE"],
     allow_headers=["Content-Type"],
 )
 
@@ -135,6 +135,17 @@ def update_notice(
     db.commit()
     db.refresh(notice)
     return notice
+
+
+@app.delete("/api/notices/{notice_id}", status_code=204)
+def delete_draft_notice(notice_id: str, db: Session = Depends(get_db)) -> Response:
+    """Discard a draft that was extracted but never confirmed or linked to a matter."""
+    notice = _notice_or_404(notice_id, db)
+    if notice.parse_status != "review_required" or notice.matter_id is not None:
+        raise HTTPException(status_code=409, detail="Only unconfirmed drafts can be deleted")
+    db.delete(notice)
+    db.commit()
+    return Response(status_code=204)
 
 
 @app.post("/api/notices/{notice_id}/extract", response_model=NoticeDetail)

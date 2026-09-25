@@ -14,6 +14,7 @@ const api = vi.hoisted(() => ({
   getNotices: vi.fn(),
   getWeekTasks: vi.fn(),
   updateNotice: vi.fn(),
+  deleteDraftNotice: vi.fn(),
 }))
 
 vi.mock('./api', () => ({
@@ -208,5 +209,46 @@ describe('校事清主流程', () => {
     await waitFor(() => expect(api.updateNotice).toHaveBeenCalledWith('notice_1', expect.objectContaining({ raw_text: '修改后的正文' })))
     expect(api.createNotice).toHaveBeenCalledTimes(1)
     expect(api.extractNotice).toHaveBeenCalledTimes(2)
+  })
+
+  it('放弃草稿后删除该通知并回到空白的添加页', async () => {
+    const draft = {
+      id: 'notice_1',
+      title: null,
+      source_name: null,
+      source_url: null,
+      published_at: null,
+      source_type: 'manual_copy',
+      parse_status: 'review_required' as const,
+      matter_id: null,
+      raw_text: '临时草稿',
+      collected_by: null,
+      collected_at: null,
+      imported_at: '2026-09-19T00:00:00Z',
+      created_at: '2026-09-19T00:00:00Z',
+      extracted_json: {
+        matter_name: '',
+        audience: [],
+        stage: '',
+        deadline: null,
+        submit_channel: '',
+        materials: [],
+        explicit_change: '',
+        confidence: 0,
+        evidence: [],
+      },
+    }
+    api.createNotice.mockResolvedValue(draft)
+    api.extractNotice.mockResolvedValue(draft)
+    api.deleteDraftNotice.mockResolvedValue(undefined)
+
+    render(<App />)
+    fireEvent.change(screen.getByLabelText(/原文正文/), { target: { value: '临时草稿' } })
+    fireEvent.click(screen.getByRole('button', { name: /保存并提取/ }))
+    fireEvent.click(await screen.findByRole('button', { name: '放弃草稿' }))
+
+    await waitFor(() => expect(api.deleteDraftNotice).toHaveBeenCalledWith('notice_1'))
+    expect(await screen.findByText('已放弃这条草稿')).toBeInTheDocument()
+    expect(screen.getByLabelText(/原文正文/)).toHaveValue('')
   })
 })

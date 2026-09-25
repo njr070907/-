@@ -5,6 +5,7 @@ import {
   compareMatterNotices,
   confirmNotice,
   createNotice,
+  deleteDraftNotice,
   extractNotice,
   getHealth,
   getMatter,
@@ -274,6 +275,26 @@ function App({ embedded = false }: { embedded?: boolean }) {
     }
   }
 
+  async function handleDiscard() {
+    if (!reviewNotice) return
+    setFormError('')
+    setSaving(true)
+    try {
+      await deleteDraftNotice(reviewNotice.id)
+      setTitle('')
+      setSourceName('')
+      setSourceUrl('')
+      setRawText('')
+      setReviewNotice(null)
+      setDraftNoticeId(null)
+      setToast('已放弃这条草稿')
+    } catch (cause) {
+      setFormError(messageFrom(cause, '放弃草稿失败，请稍后重试'))
+    } finally {
+      setSaving(false)
+    }
+  }
+
   async function openMatter(id: string) {
     setMatterLoading(true)
     setComparison(null)
@@ -388,6 +409,7 @@ function App({ embedded = false }: { embedded?: boolean }) {
                 saving={saving}
                 onBack={() => setReviewNotice(null)}
                 onConfirm={handleConfirm}
+                onDiscard={() => void handleDiscard()}
                 onExtractionChange={updateExtraction}
                 onExistingMatterChange={setExistingMatterId}
                 onIncludeTaskChange={setIncludeTask}
@@ -535,6 +557,7 @@ type ReviewProps = {
   onIncludeTaskChange: (value: boolean) => void
   onConfirm: (event: FormEvent) => void
   onBack: () => void
+  onDiscard: () => void
 }
 
 function ReviewForm(props: ReviewProps) {
@@ -572,7 +595,7 @@ function ReviewForm(props: ReviewProps) {
 
         <label className="task-switch"><input checked={props.includeTask} onChange={(event) => props.onIncludeTaskChange(event.target.checked)} type="checkbox" /><span><strong>同时创建待办</strong><small>使用上方的阶段、时间、入口和材料</small></span></label>
         {props.formError && <p className="field-error" role="alert">{props.formError}</p>}
-        <div className="form-actions"><button className="secondary-button" onClick={props.onBack} type="button">返回修改原文</button><button className="primary-button" disabled={props.saving} type="submit">{props.saving ? '正在确认…' : '确认并保存'}<span>✓</span></button></div>
+        <div className="form-actions"><button className="text-button" disabled={props.saving} onClick={props.onDiscard} type="button">放弃草稿</button><button className="secondary-button" onClick={props.onBack} type="button">返回修改原文</button><button className="primary-button" disabled={props.saving} type="submit">{props.saving ? '正在确认…' : '确认并保存'}<span>✓</span></button></div>
       </form>
     </section>
   )

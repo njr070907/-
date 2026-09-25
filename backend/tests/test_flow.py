@@ -154,3 +154,48 @@ def test_cors_preflight_allows_task_patch() -> None:
 
     assert response.status_code == 200
     assert "PATCH" in response.headers["access-control-allow-methods"]
+
+
+def test_only_unconfirmed_drafts_can_be_deleted(tmp_path: Path) -> None:
+    engine = create_engine(
+        f"sqlite:///{tmp_path / 'test.db'}", connect_args={"check_same_thread": False}
+    )
+    Base.metadata.create_all(engine)
+    sessions = sessionmaker(bind=engine)
+
+    def override_db():
+        with sessions() as db:
+            yield db
+
+    app.dependency_overrides[get_db] = override_db
+    try:
+        with TestClient(app) as client:
+            draft = client.post("/api/notices", json={"raw_text": "草稿通知"}).json()["id"]
+            # Seed notices are also "raw", so only extracted drafts can be discarded.
+            assert client.delete(f"/api/notices/{draft}").status_code == 409
+            client.post(f"/api/notices/{draft}/extract")
+            assert client.delete(f"/api/notices/{draft}").status_code == 204
+            assert client.get(f"/api/notices/{draft}").status_code == 404
+            assert client.delete(f"/api/notices/{draft}").status_code == 404
+
+            confirmed = client.post(
+                "/api/notices", json={"raw_text": "已确认通知\n办理阶段：学院初审"}
+            ).json()["id"]
+            fields = client.post(f"/api/notices/{confirmed}/extract").json()["extracted_json"]
+            client.post(
+                f"/api/notices/{confirmed}/confirm",
+                json={"extraction": fields, "new_matter_name": "事项"},
+            )
+            assert client.delete(f"/api/notices/{confirmed}").status_code == 409
+
+            preflight = client.options(
+                f"/api/notices/{confirmed}",
+                headers={
+                    "Origin": "http://localhost:5173",
+                    "Access-Control-Request-Method": "DELETE",
+                },
+            )
+            assert "DELETE" in preflight.headers["access-control-allow-methods"]
+    finally:
+        app.dependency_overrides.clear()
+        engine.dispose()
