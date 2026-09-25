@@ -13,7 +13,7 @@
 
 ## 提交 Pull Request 前
 
-- 确认项目能按 README 运行，相关测试或构建通过。
+- 确认项目能按 README 运行，相关测试或构建通过。PR 页面上的 CI 检查（后端 pytest、前端构建与测试）必须通过后再合并。
 - 检查 `git status`，不要提交真实 `.env`、Secret、数据库文件、`node_modules` 或 Python 虚拟环境。
 - 查看自己的改动，避免覆盖其他成员代码；在 PR 中说明改动和验证方法，目标分支选 `main`。
 - 如遇 merge conflict，不要盲目选择 “Accept All”；请联系熟悉 Git 的成员一起确认每处差异。
