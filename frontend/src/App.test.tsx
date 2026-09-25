@@ -57,6 +57,22 @@ describe('校事清主流程', () => {
     expect(api.createNotice).not.toHaveBeenCalled()
   })
 
+  it('搜索前不提示“没有匹配结果”，点推荐词直接搜索', async () => {
+    render(<App />)
+    fireEvent.click((await screen.findAllByRole('button', { name: '搜索' }))[0])
+
+    fireEvent.change(await screen.findByLabelText('搜索通知'), { target: { value: '奖学金' } })
+    expect(screen.queryByText('没有匹配结果')).not.toBeInTheDocument()
+    expect(api.getNotices).not.toHaveBeenCalled()
+
+    fireEvent.change(screen.getByLabelText('搜索通知'), { target: { value: '' } })
+    fireEvent.click(screen.getByRole('button', { name: '提交' }))
+
+    await waitFor(() => expect(api.getNotices).toHaveBeenCalledWith('提交'))
+    expect(await screen.findByText('没有匹配结果')).toBeInTheDocument()
+    expect(screen.getByLabelText('搜索通知')).toHaveValue('提交')
+  })
+
   it('网络不可用时保留原文并显示中文重试提示', async () => {
     api.createNotice.mockRejectedValue(new Error('Failed to fetch'))
     render(<App />)

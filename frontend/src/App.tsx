@@ -143,6 +143,7 @@ function App({ embedded = false }: { embedded?: boolean }) {
   const [tasksLoading, setTasksLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<NoticeSummary[]>([])
+  const [searchedQuery, setSearchedQuery] = useState<string | null>(null)
   const [searching, setSearching] = useState(false)
 
   useEffect(() => {
@@ -342,20 +343,32 @@ function App({ embedded = false }: { embedded?: boolean }) {
     }
   }
 
-  async function handleSearch(event: FormEvent) {
-    event.preventDefault()
-    if (!searchQuery.trim()) {
+  async function runSearch(value: string) {
+    const query = value.trim()
+    if (!query) {
       setSearchResults([])
+      setSearchedQuery(null)
       return
     }
     setSearching(true)
     try {
-      setSearchResults(await getNotices(searchQuery))
+      setSearchResults(await getNotices(query))
+      setSearchedQuery(query)
     } catch (cause) {
       setGlobalError(messageFrom(cause, '搜索失败'))
     } finally {
       setSearching(false)
     }
+  }
+
+  function handleSearch(event: FormEvent) {
+    event.preventDefault()
+    void runSearch(searchQuery)
+  }
+
+  function pickSearch(value: string) {
+    setSearchQuery(value)
+    void runSearch(value)
   }
 
   return (
@@ -456,8 +469,10 @@ function App({ embedded = false }: { embedded?: boolean }) {
           <SearchView
             query={searchQuery}
             results={searchResults}
+            searchedQuery={searchedQuery}
             searching={searching}
             onOpen={(id) => void showNotice(id)}
+            onPick={pickSearch}
             onQueryChange={setSearchQuery}
             onSubmit={handleSearch}
           />
@@ -677,12 +692,14 @@ function WeekView({ tasks, loading, onToggle }: { tasks: Task[]; loading: boolea
   )
 }
 
-function SearchView({ query, results, searching, onQueryChange, onSubmit, onOpen }: { query: string; results: NoticeSummary[]; searching: boolean; onQueryChange: (value: string) => void; onSubmit: (event: FormEvent) => void; onOpen: (id: string) => void }) {
+function SearchView({ query, results, searchedQuery, searching, onQueryChange, onPick, onSubmit, onOpen }: { query: string; results: NoticeSummary[]; searchedQuery: string | null; searching: boolean; onQueryChange: (value: string) => void; onPick: (value: string) => void; onSubmit: (event: FormEvent) => void; onOpen: (id: string) => void }) {
+  // Only report "no results" for the query that was actually searched, not while typing.
+  const noResults = !searching && searchedQuery !== null && searchedQuery === query.trim() && results.length === 0
   return (
     <section className="search-view">
       <form className="search-box" onSubmit={onSubmit}><Icon name="search" /><input aria-label="搜索通知" autoFocus value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="输入通知标题或正文关键词" /><button type="submit">{searching ? '搜索中…' : '搜索'}</button></form>
-      {!query && <div className="search-hint"><p>可以试试</p><button onClick={() => onQueryChange('奖学金')} type="button">奖学金</button><button onClick={() => onQueryChange('提交')} type="button">提交</button><button onClick={() => onQueryChange('截止')} type="button">截止</button></div>}
-      {query && !searching && results.length === 0 && <EmptyState title="没有匹配结果" detail="换一个关键词，或检查通知是否已经保存。" />}
+      {!query && <div className="search-hint"><p>可以试试</p><button onClick={() => onPick('奖学金')} type="button">奖学金</button><button onClick={() => onPick('提交')} type="button">提交</button><button onClick={() => onPick('截止')} type="button">截止</button></div>}
+      {noResults && <EmptyState title="没有匹配结果" detail="换一个关键词，或检查通知是否已经保存。" />}
       <div className="search-results">{results.map((notice) => <button key={notice.id} onClick={() => onOpen(notice.id)} type="button"><div><StatusPill status={notice.parse_status} /><strong>{noticeTitle(notice)}</strong><small>{notice.source_name || '未提供来源'}</small></div><span>查看原文 →</span></button>)}</div>
     </section>
   )
