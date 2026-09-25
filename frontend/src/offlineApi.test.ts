@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { offlineRequest } from './offlineApi'
-import type { NoticeDetail, NoticeSummary } from './api'
+import type { MatterDetail, MatterSummary, NoticeDetail, NoticeSummary } from './api'
 import { LocalAuthAdapter, seedLocalDemoAccount } from './auth'
 
 describe('offline API for the personalized UI', () => {
@@ -34,6 +34,28 @@ describe('offline API for the personalized UI', () => {
     })
     const results = await offlineRequest<NoticeSummary[]>('/api/notices?query=' + encodeURIComponent('离线测试'))
     expect(results.map(item => item.id)).toContain(created.id)
+  })
+
+  it('moves the task with a re-confirmed notice and drops the emptied matter', async () => {
+    const created = await offlineRequest<NoticeDetail>('/api/notices', {
+      method: 'POST',
+      body: JSON.stringify({ raw_text: '办理阶段：学院初审' }),
+    })
+    const { extracted_json: extraction } = await offlineRequest<NoticeDetail>(`/api/notices/${created.id}/extract`, { method: 'POST' })
+    const confirm = (body: object) => offlineRequest<NoticeDetail>(`/api/notices/${created.id}/confirm`, {
+      method: 'POST',
+      body: JSON.stringify({ extraction, ...body }),
+    })
+    const oldMatterId = (await confirm({
+      new_matter_name: '旧事项',
+      task: { stage: '学院初审', deadline: '2026-09-21', submit_channel: '', materials: [] },
+    })).matter_id
+    const newMatterId = (await confirm({ new_matter_name: '新事项' })).matter_id
+
+    const matter = await offlineRequest<MatterDetail>(`/api/matters/${newMatterId}`)
+    expect(matter.tasks.map(task => task.source_notice_id)).toEqual([created.id])
+    const matters = await offlineRequest<MatterSummary[]>('/api/matters')
+    expect(matters.map(item => item.id)).not.toContain(oldMatterId)
   })
 
   it('creates and signs in to an offline demo account', async () => {

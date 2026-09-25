@@ -100,6 +100,25 @@ def _matter_or_404(matter_id: str, db: Session) -> Matter:
     return matter
 
 
+def _move_notice_to_matter(notice: Notice, matter_id: str, db: Session) -> None:
+    """Move a notice together with its task, and drop the matter it leaves empty."""
+    previous_matter_id = notice.matter_id
+    notice.matter_id = matter_id
+    task = db.scalar(select(Task).where(Task.source_notice_id == notice.id))
+    if task is not None:
+        task.matter_id = matter_id
+    if not previous_matter_id or previous_matter_id == matter_id:
+        return
+
+    db.flush()
+    still_used = db.scalar(
+        select(Notice.id).where(Notice.matter_id == previous_matter_id).limit(1)
+    ) or db.scalar(select(Task.id).where(Task.matter_id == previous_matter_id).limit(1))
+    previous = db.get(Matter, previous_matter_id)
+    if previous is not None and not still_used:
+        db.delete(previous)
+
+
 @app.patch("/api/notices/{notice_id}", response_model=NoticeDetail)
 def update_notice(
     notice_id: str, payload: NoticeUpdate, db: Session = Depends(get_db)
@@ -222,7 +241,7 @@ def confirm_notice(
         )
         db.add(matter)
 
-    notice.matter_id = matter.id
+    _move_notice_to_matter(notice, matter.id, db)
     notice.extracted_json = payload.extraction.model_dump(mode="json")
     notice.parse_status = "confirmed"
 
@@ -241,7 +260,6 @@ def confirm_notice(
             )
             db.add(task)
         else:
-            task.matter_id = matter.id
             task.stage = payload.task.stage
             task.deadline = payload.task.deadline
             task.submit_channel = payload.task.submit_channel
@@ -259,7 +277,7 @@ def associate_notice_with_matter(
 ) -> Notice:
     _matter_or_404(matter_id, db)
     notice = _notice_or_404(notice_id, db)
-    notice.matter_id = matter_id
+    _move_notice_to_matter(notice, matter_id, db)
     db.commit()
     db.refresh(notice)
     return notice
